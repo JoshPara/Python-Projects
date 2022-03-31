@@ -1,0 +1,19 @@
+# Joshua Paradie - Homework 2.5 - Sales Tax
+# This program will take the user input for amount of a purchase and from that amount
+# calculate the sales tax (5 Percent) and calculate the county sales tax (2.5 percent).
+# The program will then display the purchase amount, the state sales tax, the county sales
+# tax, the total sales tax, and the total of the sale.
+
+print("\nSales Tax Program \n-----------------")
+total_purchase_price = float(input("Enter The Total Amount Of The Purchase: $"))
+state_tax = total_purchase_price * 0.05
+county_tax = total_purchase_price * 0.025
+total_sales_tax = state_tax + county_tax
+total_of_the_sale = total_purchase_price + total_sales_tax
+# Above are the 4 calculations to determine sales tax, county tax, total sales tax, and total
+# of the entire sale
+print("\nAmount Of The Purchase: $", total_purchase_price)
+print("State Sales Tax: $", state_tax)
+print("County Sales Tax: $", county_tax)
+print("Total Sales Tax: $", total_sales_tax)
+print("------------------------- \nTotal Of Sale: $", total_of_the_sale)

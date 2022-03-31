@@ -1,0 +1,8 @@
+# Joshua Paradie - Homework 2.2 - Land Calculations
+# This is a program that takes the users entered amount of land, in square feet,
+# then calculates the total number of acres they own based off their square feet
+
+print("\nLand Calculator \n---------------")
+squareFeetLand = float(input("Enter Total Owned Land In Square Feet: "))
+numberOfAcres = squareFeetLand / 43560
+print("The Total Number Of Acres Owned Is: ", numberOfAcres)

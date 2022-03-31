@@ -1,0 +1,42 @@
+# Joshua Paradie - 02/16/2022 - Program # 3
+# This program will display the following information from Joe's purchase of stock in Acme Software, Inc.:
+# The amount of money Joe paid for the stock. The amount of commission Joe paid his broker when he bought the stock.
+# The amount the Joe sold the stock for. The amount of commission Joe paid his broker when he sold the stock. The amount
+# of money that Joe had left when he sold the stock and paid his broker (both times).
+
+print("Stock Transaction Program \n-------------------------")
+number_of_shares_purchased = 2000
+purchase_price_per_share = 40.0
+stockbroker_commission = .03
+number_of_shares_sold = 2000
+selling_price_per_share = 42.75
+# The above code is the standard information regarding purchase amount, purchase price, commission amount, selling
+# amount, and price of share when sold.
+amount_of_money_paid_for_the_stock = number_of_shares_purchased * purchase_price_per_share
+amount_of_commission_for_broker_when_buying_the_stock = amount_of_money_paid_for_the_stock * stockbroker_commission
+amount_of_money_stocks_sold_for = number_of_shares_sold * selling_price_per_share
+amount_of_commission_for_broker_when_selling_the_stock = (number_of_shares_sold * selling_price_per_share) \
+                                                         * stockbroker_commission
+amount_of_money_left_after_selling_paying_both_commissions = amount_of_money_stocks_sold_for - \
+                                                             amount_of_money_paid_for_the_stock - \
+                                                             amount_of_commission_for_broker_when_buying_the_stock - \
+                                                             amount_of_commission_for_broker_when_selling_the_stock
+# The above code are the equations to determine the amount of money paid for the stocks, the amount of commission when
+# buying the stocks, the amount of money the stocks were sold for, the amount of commission the broker got for the sale,
+# and the amount of money left over for Joe (selling price - purchase price - buying commission - selling commission)
+print(f"The Amount Of Money Joe Paid For The Stock: ${amount_of_money_paid_for_the_stock}")
+print(f"The Amount Of Commission Joe Paid His Broker When He Bought The Stock: $"
+      f"{amount_of_commission_for_broker_when_buying_the_stock}")
+print(f"The Amount Of Money Joe Sold The Stocks For: ${amount_of_money_stocks_sold_for}")
+print(f"The Amount Of Commission Joe Paid His Broker When He Sold The Stocks: $ "
+      f"{amount_of_commission_for_broker_when_selling_the_stock}")
+print(f"The Amount Of Money Joe Has Left After Selling Stocks And Paying Broker Both Times is: $"
+      f"{amount_of_money_left_after_selling_paying_both_commissions}")
+# The above code prints all the information.
+if amount_of_money_left_after_selling_paying_both_commissions > 0:
+    print("Joe Made A Profit!!")
+elif amount_of_money_left_after_selling_paying_both_commissions < 0:
+    print("Joe Lost Money!!")
+else:
+    print("Joe Broke Even!!")
+# The above If, Elif, Else statement is to determine if Joe made a profit, lost money, or broke even after everything.

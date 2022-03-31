@@ -1,0 +1,17 @@
+# Joshua Paradie - 02/16/2022 - Question 2
+# This code has the user enter the number of males and the number of females enrolled in the class. The program then
+# displays the percent of males in the class, and it displays the percent of females in the class.
+
+print("Male And Female Percentage \n--------------------------")
+number_of_males = int(input("Enter The Number Of Males In The Class: "))
+number_of_females = int(input("Enter The Number Of Females In The Class: "))
+# The above code has the user enter the number of males in the class and the number of females in the class.
+number_of_people_total = number_of_males + number_of_females
+percent_of_males = (number_of_males / number_of_people_total) * 100
+percent_of_females = (number_of_females / number_of_people_total) * 100
+# The above code calculates the total number of people in the class and then using that calculates the percent of males
+# and the percent of females by dividing the number of males or females by the total number of people in the class, and
+# then it is multiplied by 100 to turn the decimal into a whole number to be displayed next to a "%".
+print(f"\nThe Class Is {percent_of_males}% Male")
+print(f"The Class Is {percent_of_females}% Female")
+# The above code prints the percent of males and the percent of females in the class.

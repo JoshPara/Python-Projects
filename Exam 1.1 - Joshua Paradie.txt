@@ -1,0 +1,18 @@
+# Joshua Paradie - 02/16/2022 - Program #1
+# This program is used to determine the amount of each ingredient that the user will need for the inputted number of
+# cookies. 
+
+print("Cookie Recipe \n-------------")
+number_of_cookies = int(input("Enter The Number Of Cookies You Want To Make: "))
+# Above is for the user to input the amount of cookies they would like to make
+amount_of_sugar = (1.5 / 48) * number_of_cookies
+amount_of_butter = (1.0 / 48.0) * number_of_cookies
+amount_of_flour = (2.75 / 48.0) * number_of_cookies
+# The above code is to determine how much of each ingredient the user will need to make the inputted number of cookies.
+# The math done here is to divide the amount of each ingredient on the recipe by 48 cookies since that's what the
+# recipe card makes to find out the ingredients needed per cookie and then multipy it by the number of inputted cookies.
+print(f"\nTo Make {number_of_cookies} Cookies:")
+print(f"You Will Need {amount_of_sugar} Cups Of Sugar")
+print(f"You Will Need {amount_of_butter} Cups Of Butter")
+print(f"You Will Need {amount_of_flour} Cups Of Flour")
+# The above code prints the amount of each ingredient needed for the inputted number of cookies the user wants to make.
