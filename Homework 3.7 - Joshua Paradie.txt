@@ -1,0 +1,29 @@
+# Joshua Paradie - Homework 3.7 - Color Mixer
+# This program will have the user enter two primary colors. The program will then display a message of what
+# secondary color those two primary colors make when mixed together. If the user enters any color other
+# than a primary color, the program will display an error message.
+
+print("Color Mixer \n-----------")
+print("Primary Colors Are: 'red', 'blue', 'yellow'")
+first_Primary_Color = input("Enter The First Primary Color, All In Lower Case: ")
+second_Primary_Color = input("Enter The Second Primary Color, All In Lower Case: ")
+# The above code has the user input the two primary colors chosen by them
+if (first_Primary_Color == 'red' or second_Primary_Color == 'red') and (first_Primary_Color == 'blue' or
+                                                                        second_Primary_Color == 'blue'):
+    print("The Secondary Color Is Purple")
+# The code above checks if one of the colors entered is red and if one is blue, if so it prints that the secondary
+# color is purple
+elif (first_Primary_Color == 'red' or second_Primary_Color == 'red') and (second_Primary_Color == 'yellow' or
+                                                                          first_Primary_Color == 'yellow'):
+    print("The Secondary Color Is Orange")
+# The code above checks if one of the colors entered is red and if one is yellow, if so it prints that the secondary
+# color is Orange
+elif (first_Primary_Color == 'yellow' or second_Primary_Color == 'yellow') and (second_Primary_Color == 'blue'
+                                                                                or first_Primary_Color == 'blue'):
+    print("The Secondary Color Is Green")
+# The code above checks if one of the colors entered is yellow and if one is blue, if so it prints that the secondary
+# color is blue
+else:
+    print("Error... One Of The Colors Entered Is Not A Primary Color!!!")
+# The code above prints an error message if one of the conditions above isn't true, which means that the user didn't
+# enter 2 primary colors

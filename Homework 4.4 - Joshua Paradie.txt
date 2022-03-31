@@ -1,0 +1,18 @@
+# Joshua Paradie - Homework 4.4 - Calculating The Factorial of a Number - 02/15/2022
+# This program has the user enter a non-negative integer and the program uses a loop to calculate the factorial of that
+# user entered number and displays the factorial.
+
+print("Calculating The Factorial Of A Number \n-------------------------------------")
+user_entered_number = int(input("Enter A Non-Negative integer: "))
+# Has the user enter a non-negative integer to find the factorial of.
+
+count = user_entered_number
+factorial_number = user_entered_number
+# Sets count to the entered number along with the factorial number so that the looping equation will calculate correctly
+
+while count != 1:
+    count = count - 1
+# Loops down till count is decreased to 1
+    factorial_number = factorial_number * count
+
+print("The Factorial Of", user_entered_number, "is", factorial_number)

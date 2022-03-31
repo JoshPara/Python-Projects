@@ -1,0 +1,29 @@
+# Joshua Paradie - Homework 6.2 - Item Counter - 03/05/2022
+# This is a program that will take a file named names.txt from the computers' disk. It will then display the number of
+# names that are on the file.
+
+def main():
+    print("Item Counter \n------------")
+    count = 0
+    for line in open_name_file():
+        count = count + 1
+        print(line)
+    print(f"There Are {count} Names In The File.")
+# The above code creates a counter, brings in 'open_name_file', goes line by line printing the names in the file and
+# increasing the counter by 1 each time. After all the lines have been gone through, the program displays the number of
+# names in the file.
+
+
+def open_name_file():
+    in_file = open("names.txt", "r")
+    contents_of_file = in_file.read()
+    in_file.close()
+    contents_of_file = contents_of_file.split("\n")
+    return contents_of_file
+# The above code opens the 'names.txt' file in read mode, reads the contents of the file, saves and closes the file. It
+# then splits the contents of the file by the '\n' character and returns the contents to main.
+
+
+if __name__ == '__main__':
+    main()
+# The above code calls in main

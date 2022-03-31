@@ -1,0 +1,14 @@
+# Joshua Paradie - Homework 4.2 - Calories Burned - 2/15/2021
+# This program will use a loop function to display the number of calories burned after different intervals of time.
+# Printing the number of calories burned after 10, 15, 20, 25, and 30 minutes. This will be done using the constant of
+# 4.2 calories burned per minute. The program will calculate the number of burned calories for each interval and display
+# it. The loop will end when all interval calculations are displayed.
+
+print("\nCalories Burned \n---------------")
+
+for minutes_of_exercise in range(10, 35, 5):
+    calories_burned = minutes_of_exercise * 4.2
+    print("The Amount Of Calories Burned After", minutes_of_exercise, "Minutes Is:", calories_burned)
+# The above loop, loops through the program, starting at 10 minutes and increasing by 5 minutes with every loop so that
+# it can display the 10, 15, 20, 25, 30 minutes equation for calories burned in that timeframe. It continues till it
+# prints the 30 minutes of exercise, and then it quits the loop.

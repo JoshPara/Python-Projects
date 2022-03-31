@@ -1,0 +1,32 @@
+# Joshua Paradie - Homework 3.2 -Areas of Rectangles
+#  This program has the user input the length and width of two rectangle
+# The program then computes the area of both rectangles and will tell the
+# user which rectangle has a greater area or if they are the same
+
+print("\nRectangle 1:")
+rectangle_1_Length = float(input("Enter The Length Of The First Rectangle: "))
+rectangle_1_Width = float(input("Enter The Width Of The First Rectangle: "))
+rectangle_1_Area = rectangle_1_Length * rectangle_1_Width
+print("The Area Of Rectangle 1 is", rectangle_1_Area)
+# The above code asks the user to input the length & width of the 1st rectangle
+# The program then calculates and displays the area of the Rectangle
+print("--------------------------------")
+print("Rectangle 2:")
+rectangle_2_Length = float(input("Enter The Length Of The Second Rectangle: "))
+rectangle_2_Width = float(input("Enter The Width Of The Second Rectangle: "))
+rectangle_2_Area = rectangle_2_Length * rectangle_2_Width
+print("The Area Of Rectangle 2 is", rectangle_2_Area)
+# The above code asks the user to input the length and width of the 2nd rectangle
+# The program then calculates and displays the area of the rectangle
+print("--------------------------------")
+if rectangle_1_Area > rectangle_2_Area:
+    print("Rectangle 1 Has A Greater Area Than Rectangle 2")
+elif rectangle_1_Area < rectangle_2_Area:
+    print("Rectangle 2 Has A Greater Area Than Rectangle 1")
+elif rectangle_1_Area == rectangle_2_Area:
+    print("Rectangle 1 Has The Same Area As Rectangle 2")
+# The above code compares the area of the two rectangle and outputs the
+# corresponding statement
+else:
+    print("Error Computing...")
+# This above code is in case of errors in computing

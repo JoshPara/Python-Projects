@@ -1,0 +1,32 @@
+# Joshua Paradie - Homework 6.5 - Random Number File Writer - 03/22/2022
+# This program asks how many numbers the user wants to write to a file, it then writes a series of random numbers (the
+# specified amount) to a file, the numbers being in a range of 1 through 500.
+
+def main():
+    specified_numbers = int(input('How Many Random Numbers Do You Want To Write: '))
+    write_numbers_file(specified_numbers)
+    print('Random Numbers Written To File')
+# The above code has the user enter the amount of random numbers they want to write to a file, it calls in
+# 'write_numbers_file' function and passes the specified number. At the end it prints a success message.
+
+
+def write_numbers_file(numbers):
+    outfile = open('random_numbers.txt', 'w')
+    import random
+    counter = 0
+# The above code opens a new file into write mode, imports random library, and creates a counter.
+
+    while counter < numbers:
+        write_number = int(random.randint(1, 500))
+        outfile.write(str(write_number) + '\n')
+        counter = counter + 1
+    # The above code is a loop for generating and writing a random number into the file, including converting the int to
+    # a string to write into the file.
+
+    outfile.close()
+    # Closes the file
+
+
+if __name__ == '__main__':
+    main()
+# The above code calls in main

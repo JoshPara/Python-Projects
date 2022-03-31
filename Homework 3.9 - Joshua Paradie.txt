@@ -1,0 +1,57 @@
+# Joshua Paradie -Homework 3.9 - Roulette Wheel Colors
+# This is a program that will have the user input a pocket number and the program will display whether the pocket
+# they chose is green, red, or black. The program will display an error message if the pocket they chose is outside
+# the range of 0 - 36.
+
+print("Roulette Wheel Colors \n---------------------")
+user_Entered_Number = int(input("Enter A Pocket Number In The Range Of 0 Through 36: "))
+# The above code has the user enter the pocket number and saves it as an int
+if user_Entered_Number == 0:
+    print("The Pocket Is Green")
+# The above code is for when the user inputted pocket number is 0, it displays the message that the pocket is green
+elif (user_Entered_Number == 1) or (
+        user_Entered_Number == 3) or (
+        user_Entered_Number == 5) or (
+        user_Entered_Number == 7) or (
+        user_Entered_Number == 9) or (
+        user_Entered_Number == 12) or (
+        user_Entered_Number == 14) or (
+        user_Entered_Number == 16) or (
+        user_Entered_Number == 18) or (
+        user_Entered_Number == 19) or (
+        user_Entered_Number == 21) or (
+        user_Entered_Number == 23) or (
+        user_Entered_Number == 25) or (
+        user_Entered_Number == 27) or (
+        user_Entered_Number == 30) or (
+        user_Entered_Number == 32) or (
+        user_Entered_Number == 34) or (
+        user_Entered_Number == 36):
+    print("The Pocket Is Red")
+# The above code is for when the user inputted pocket number is equal to a red pocket, the program will display
+# that the pocket is red.
+elif (user_Entered_Number == 2) or (
+        user_Entered_Number == 4) or (
+        user_Entered_Number == 6) or (
+        user_Entered_Number == 8) or (
+        user_Entered_Number == 10) or (
+        user_Entered_Number == 11) or (
+        user_Entered_Number == 13) or (
+        user_Entered_Number == 15) or (
+        user_Entered_Number == 17) or (
+        user_Entered_Number == 20) or (
+        user_Entered_Number == 22) or (
+        user_Entered_Number == 24) or (
+        user_Entered_Number == 26) or (
+        user_Entered_Number == 28) or (
+        user_Entered_Number == 29) or (
+        user_Entered_Number == 31) or (
+        user_Entered_Number == 33) or (
+        user_Entered_Number == 35):
+    print("The Pocket Is Black")
+# The above code is for when the user inputted number is equivalent to a black pocket, the program will display
+# that the pocket is black.
+else:
+    print("Error... Pocket Number Selected Is Outside Of The Range Of 0 - 36")
+# The above code is for when the user inputs a number that is outside the pocket number ranges. The program will
+# display an error message.

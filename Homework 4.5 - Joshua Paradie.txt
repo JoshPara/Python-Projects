@@ -1,0 +1,27 @@
+# Joshua Paradie - Homework 4.5 - Population - 02/15/2022
+# This program will predict the approximate size of a population of organisms. The program will have the user enter the
+# starting number of organisms, the average daily population increase for the organisms (as a percent), and the number
+# of days the organisms will be allowed to multiply. The program will then display a table containing each day and the
+# population for that day, up until the maximum number of days is reached.
+
+print("Population Of Organisms \n-----------------------")
+starting_number_of_organisms = int(input("Enter The Starting Number Of Organisms: "))
+average_daily_population_increase = float(input("Enter The Average Daily Population Increase As A Percentage: "))
+average_daily_population_increase = average_daily_population_increase / 100
+# Above code has the user enter the starting number of organisms and the average daily population increase, it then
+# converts the user entered population increase from a percentage to a decimal to make calculations easier.
+
+number_of_days_organism_multiplying = int(input("Enter The Number Of Days The Organism Will Multiply: "))
+day = 1
+# Above code has the user enter the total number of days the organism will multiple for and sets the starting day to 1.
+print("Day Approximate \t\t Population")
+
+while day <= number_of_days_organism_multiplying:
+    print(day, "\t\t\t\t\t\t", starting_number_of_organisms)
+    day = day + 1
+# Above code starts the loop on day 1 and continues until make days is reached increase day count each loop, it also
+# prints the day number and population on that day.
+    starting_number_of_organisms = starting_number_of_organisms + (starting_number_of_organisms *
+                                                                   average_daily_population_increase)
+# Above code is the calculation used to determine the population for each day, multiplying by the percentage of growth
+# per day.

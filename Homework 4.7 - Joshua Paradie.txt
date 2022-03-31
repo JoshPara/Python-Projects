@@ -1,0 +1,23 @@
+# Joshua Paradie - Homework 4.7 - Nested Loops to draw a pattern - 02/15/2022
+# This program will draw a pattern using nested loops.
+
+hash_lines = 6
+number_of_spaces_between_hash_marks = 0
+counter = 0
+# The above code sets the number of times the program repeats (hash_lines) to 6. It also creates two variables to use.
+
+while hash_lines > 0:
+    print("#", end='')
+    if number_of_spaces_between_hash_marks != 0:
+        # The above code is there, so it won't go into the nested loop the first time looping.
+        while counter != number_of_spaces_between_hash_marks:
+            print(" ", end='')
+            counter = counter + 1
+            # The above code is the nested loop that determines how many spaces are between the two hash marks printed.
+    print("#")
+    counter = 0
+    # The above code prints the second hash mark and starts a new line and also resets the counter for the nested loop.
+    number_of_spaces_between_hash_marks = number_of_spaces_between_hash_marks + 1
+    # The above code is so that each time the program loops there will be an additional space inbetween the hash marks.
+    hash_lines = hash_lines - 1
+    # The above code subtracts one from the first loops counter, counting down till it reaches 0 and the program ends.

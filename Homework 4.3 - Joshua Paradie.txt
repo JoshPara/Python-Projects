@@ -1,0 +1,36 @@
+# Joshua Paradie - Homework 4.3 - Budget Analysis - 2/15/2022
+# This program will have the user enter their budget for the month, the program will then have the user enter an expense
+# and then ask them if they would like to enter another expense. The program will loop until the user choose not to
+# enter another expense, at that point the program will calculate whether the total expenses entered is over, under, or
+# exactly the entered budget and will tell them how much over or under they were.
+
+print("Budget Analysis Program \n-----------------------")
+budget_for_the_month = float(input("Enter Your Budget For The Month: $"))
+# Has the user enter their budget and saves it in a float
+
+reentry = 'y'
+running_expense_total = 0
+
+while (reentry == 'y') or (reentry == 'Y') or (reentry == 'yes') or (reentry == 'YES') or (reentry == 'Yes'):
+    input_amount = float(input("Enter The Amount For The Expense: $"))
+    running_expense_total = running_expense_total + input_amount
+    reentry = input("Do You Wish To Enter Another Expense? \n(Enter 'Y' For Yes... Enter 'N' For No...): ")
+    print()
+# The above code is a loop, user enters their expense and the program adds it to the running expense total and then if
+# the user wants to enter another expense the program will loop and allow for the user to enter as many expenses as they
+# desire.
+
+over_under_budget = budget_for_the_month - running_expense_total
+# Calculates the expense total compared to the budget
+
+if running_expense_total < budget_for_the_month:
+    print("You Are Under Budget! You Have", over_under_budget, "Dollars Remaining In Your Budget For The Month!")
+# If expense total is less than budget
+
+elif running_expense_total > budget_for_the_month:
+    print("You Are Over Budget By", abs(over_under_budget), "Dollars!!!")
+# If expense total is more than budget
+
+else:
+    print("You Spent Exactly Your Budget This Month!!!")
+# If expense total is exactly the budget

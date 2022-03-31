@@ -1,0 +1,24 @@
+# Joshua Paradie - Homework 5.4 - Future Value - 2/22/22
+# This program will take the three inputs from a user, pass them to a function, which will then use those values in an
+# equation to compute the future value of the users' money. The function will then pass back that value to main and the
+# program will print the future value of the users' money.
+
+def future_money_value(present_value, interest_rate, total_months):
+    future_value_of_account = present_value * (1.0 + interest_rate) ** total_months
+    return future_value_of_account
+# The above function takes the user inputted values and puts it in an equation to determine future value, returning that
+# future value to main.
+
+
+print("\nFuture Value \n------------")
+accounts_present_value = float(input("Enter The Accounts Present Value: $"))
+monthly_interest_rate = float(input("Enter The Current Monthly Interest Rate As A Decimal: "))
+number_of_months = float(input("Enter The Number Of Months The Money Will Be Left In The Account: "))
+# The above code are 3 user inputs, saved as float values.
+
+future_money_value(accounts_present_value, monthly_interest_rate, number_of_months)
+# The above code calls the function, passing the variable values that the user entered.
+
+print(f"The Future Value Of Your Money After {number_of_months} Months Is $", end='')
+print(future_money_value(accounts_present_value, monthly_interest_rate, number_of_months))
+# The above code prints the future value of the users' money by using the amount returned to main from the function.

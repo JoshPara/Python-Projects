@@ -1,0 +1,20 @@
+# Joshua Paradie - Homework 3.5 - Mass and Weight
+# This is a program has the user enter the mass of an object (in Kilograms) and then calculates it weight (in Newtons).
+# If the objects weight is over 500 Newtons, the program will display a message that the object is too heavy. If the
+# objects weight is less and 100 Newtons, the program will display a message that the object is too light.
+# Formula for weight is: weight = mass x 9.8
+
+print("Weight Calculator \n-----------------")
+user_entered_mass = float(input("Enter The Mass Of The Object In Kilograms: "))
+# The above code has the user enter the mass of the object in Kilograms and stores it as a float
+objects_weight = user_entered_mass * 9.8
+# The above code take the user entered mass and calculates the weight of the object
+print("The Weight Of The Object is:", objects_weight, "Newtons")
+if objects_weight > 500:
+    print("The Object Weighs Over 500 Newtons... The Object Is Too Heavy!!!")
+elif objects_weight < 100:
+    print("The Object Weighs Less Than 100 Newtons... The Object Is Too Light!!!")
+else:
+    print("The Object's Weight Is Okay!!!")
+# The above code prints the weight of the object along with the corresponding message for whether the object's weight
+# is "okay", "too light", or "too heavy"

@@ -1,0 +1,75 @@
+# Joshua Paradie - Homework 6.7 - Golf Scores - 03/22/2022
+# This Program contains 2 programs, the first one will take as user input each player's name and golf score, save all
+# the data in a filed created named 'golf.txt'. The second program will read the players and scores from 'golf.txt' and
+# display them.
+
+def main():
+    selection = 0
+    while selection != 3:
+        print('\nSpringfork Amateur Golf Club \n----------------------------')
+        print('Menu')
+        print('1) Write Golf PLayers & Scores')
+        print('2) Read Records Of Golf Players & Scores')
+        print('3) Exit Program')
+        selection = int(input('Selection An Option: '))
+    # The above code is a menu-driven application to allow the user to choose what they want to do
+
+        if selection == 1:
+            enter_golfer_info()
+        # If the user wants to write info to the file, this will open that function
+
+        elif selection == 2:
+            read_golfer_info()
+        # If the user wants to read the info from the file, this will open that function
+
+        elif selection == 3:
+            print('\nTerminating Program...')
+            return
+        # This selection will terminate the program
+
+        else:
+            print('\nInvalid Selection!!!')
+        # This is the catch for if the user choose an invalid option
+
+
+def enter_golfer_info():
+    number_of_golfers = int(input('\nEnter The Number Of Golfers: '))
+    outfile = open('golf.txt', 'w')
+    outfile.write('Players Name \t\t\t Players Score')
+    # The above code has the user specify how many golfers, opens the file for writing and writes in the sections
+
+    for count in range(1, number_of_golfers + 1):
+        golfer_name = input(f'Enter Golfer #{count} Name: ')
+        golfer_score = input(f'Enter Golfer #{count} Score: ')
+        outfile.write(f'\n{golfer_name}\t\t\t\t\t{golfer_score}')
+    # The above for loop is so the user and under the names and scores and the program writes both into the file
+
+    outfile.close()
+    # Closes the file
+
+    print('Writing To File Is Complete!!!')
+    print('-----------------------------')
+    # Displays a success message
+
+
+def read_golfer_info():
+    infile = open('golf.txt', 'r')
+    line = infile.readline()
+    print()
+    # The above code opens the file for reading, reads the first line and prints a newline line to display the info nice
+
+    while line != '':
+        print(line)
+        line = infile.readline()
+    # The above while loop reads through the file, prints each line until it comes to the end of the file and exits
+
+    infile.close()
+    # Close the file
+
+    print('-----------------------------')
+    # Pretty Printing
+
+
+if __name__ == '__main__':
+    main()
+# Calls in main

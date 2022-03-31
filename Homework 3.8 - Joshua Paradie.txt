@@ -1,0 +1,30 @@
+# Joshua Paradie - Homework 3.8 - Hot Dog Cookout Calculator
+# This program calculates the number of packages of hot dogs and packages of hot dog buns that will be needed
+# for a cookout having the least number of leftovers. The program will have the user enter the number of people
+# as well as the number of hot dogs each person will be given. The program will then calculate and display the
+# minimum number of hot dog and hot dog bun packages required as well as how many hot dogs and hot dog buns that
+# will be left over.
+import math
+# After researching how to make my equation be rounded up I discovered I needed the Math library imported.
+print("Hot Dog Cookout Calculator \n--------------------------")
+guest_Count = int(input("Enter The Number Of People Attending The Cookout: "))
+hot_Dogs_Per_Person = int(input("Enter The Number Of Hot Dogs Each Person Will Be Given: "))
+print()
+# The above code is the input for the number of people attending and the number of hot dogs per guest.
+hot_Dogs_Needed = guest_Count * hot_Dogs_Per_Person
+# The above equation is to figure out exactly how many hot dogs will be needed based on the user inputted information.
+hot_Dog_Packs = (math.ceil(hot_Dogs_Needed / 10))
+hot_Dog_Bun_Packs = (math.ceil(hot_Dogs_Needed / 8))
+# The above two equations are to figure out how many hot dog and hot dog bun packs will be needed. This number needed
+# to be rounded up since the user can't buy a part or a hot dog or hot dog bun pack. So to round up the Python ceiling
+# function was called in from the math library that was imported above.
+left_Over_Hot_Dogs = (hot_Dog_Packs * 10) - hot_Dogs_Needed
+left_Over_Hot_Dog_Buns = (hot_Dog_Bun_Packs * 8) - hot_Dogs_Needed
+# The two equations above are to figure out how many hot dogs and hot dog buns will be left over, this is done by
+# taking the minimum number of hot dog packs and hot dog bun packs required, multiplying by the number of each in each
+# pack and then subtracting the exact number that was needed to be based off the user inputted information.
+print("The Minimum Number Of Packages Of Hot Dogs Required Is:", hot_Dog_Packs)
+print("The Minimum Number Of Packages Of Hot Dog Buns Required Is:", hot_Dog_Bun_Packs)
+print("The Number Of Hot Dogs That Will Be Left Over Is:", left_Over_Hot_Dogs)
+print("The Number Of Hot Dog Buns That Will Be Left Over Is:", left_Over_Hot_Dog_Buns)
+# The above code is to display the 4 pieces of required information to the user.

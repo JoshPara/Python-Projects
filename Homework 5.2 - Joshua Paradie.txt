@@ -1,0 +1,44 @@
+# Joshua Paradie - Homework 5.2 - Prime Numbers - 2/22/22
+# This program takes a number inputted by the user and determines if the number inputted is a prime number or not.
+
+def is_prime(entered_number):
+    counter = 2
+    prime_number = 1
+    # The above code creates a function "is_prime". It creates a variable "prime_number" setting it to 1 as a way
+    # to determine whether a number is a prime. If the number is a prime the value stays "1" (aka true). Above also
+    # creates a counter variable to be used in looping.
+
+    if entered_number > 1:
+        # The above code creates an if statement to determine if the user entered number is greater than 1, since 1 and
+        # all numbers less than 1 are not prime numbers.
+
+        while counter < entered_number:
+            if entered_number % counter == 0:
+                return 0
+            else:
+                counter = counter + 1
+        # The above code is a loop to determine if the number entered is not a prime number. If the number is not a
+        # prime number the program will return false (0) to main. If not the program will cycle to make sure the user
+        # entered number is a prime number and then exit the loop, keeping "prime_number" marked as 1 aka true.
+
+        if prime_number == 1:
+            return 1
+        # The code above will return true (1) to main since the number entered is a prime number.
+
+    else:
+        return 0
+    # The above code will return false (0) to main if the user entered number that is 1 or less.
+
+
+print("\nPrime Numbers \n-------------")
+user_entered_number = int(input("Enter A Number: "))
+is_prime(user_entered_number)
+
+if is_prime(user_entered_number) == 1:
+    print(f"{user_entered_number} Is A Prime Number!!!")
+else:
+    print(f"{user_entered_number} Is NOT A Prime Number!!!")
+# The above code has the user enter a number, it then calls the function "is_prime" and uses the user entered number for
+# the function. After running the function the program will see what the function returns, if 1 it means the number is a
+# prime number and the program will display that. If it returns 0, then it is not a prime number and the program will
+# say so.

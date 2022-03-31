@@ -1,0 +1,74 @@
+# Joshua Paradie - Homework 6.6 - Exception Handling - 03/22/2022
+# This program edits the program written in 6.5 with the new information so that it can handle exceptions. Handling
+# exceptions to IOError and ValueError
+
+def main():
+    print('Exception Handling \n------------------')
+    specified_numbers = int(input('How Many Random Numbers Do You Want To Write: '))
+    write_numbers_file(specified_numbers)
+    print('\nRandom Numbers Written To File!!!')
+# The above code has the user enter the amount of random numbers they want to write to a file, it calls in
+# 'write_numbers_file' function and passes the specified number. At the end it prints a success message.
+
+    exceptions()
+    # Calls exceptions function and tests if there are any exception in the 'random_numbers.txt' file
+
+    print('\nThe Numbers In The File Are:')
+    for line in read_numbers_file():
+        print(line)
+    # Calls the read_numbers_file function to main, and goes each line printing the number
+
+
+def exceptions():
+    try:
+        read_numbers_file()
+        pass
+    # Tries and opens 'random_numbers.txt' by running the 'read_numbers_file' function
+
+    except IOError:
+        print('Error Opening And Reading Data From File')
+        pass
+    # Accounts for IOError Exceptions
+
+    except ValueError:
+        print('Error Converting Items From A File To A Number')
+        pass
+    # Accounts for ValueError Exceptions
+
+    else:
+        print('\nThere Are No Exceptions Raised In File...')
+        pass
+    # If there are no exceptions raised then it prints that message
+
+
+def read_numbers_file():
+    infile = open('random_numbers.txt', 'r')
+    contents_of_file = infile.read()
+    infile.close()
+# The above code opens the random_numbers.txt file created in exercise 5 into read mode, reads the file and closes it.
+
+    contents_of_file = contents_of_file.split('\n')
+    return contents_of_file
+    # The above code splits the contents of the file by the line and then returns it
+
+
+def write_numbers_file(numbers):
+    outfile = open('random_numbers.txt', 'w')
+    import random
+    counter = 0
+# The above code opens a new file into write mode, imports random library, and creates a counter.
+
+    while counter < numbers:
+        write_number = int(random.randint(1, 500))
+        outfile.write(str(write_number) + '\n')
+        counter = counter + 1
+    # The above code is a loop for generating and writing a random number into the file, including converting the int to
+    # a string to write into the file.
+
+    outfile.close()
+    # Closes the file
+
+
+if __name__ == '__main__':
+    main()
+# The above code calls in main

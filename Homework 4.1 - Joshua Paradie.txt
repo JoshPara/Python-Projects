@@ -1,0 +1,22 @@
+# Joshua Paradie - Homework 4.1 - Bug Collector - 2/15/2021
+# This program will help the bug collector keep tract of how many bugs they collect total during a five-day span.
+# The program will have the bug collector enter the number of bugs collected each day, it will then tally up
+# how many bugs they collected total and display that amount
+
+days = 1
+total_bugs_collected = 0
+# The above code sets the first day to 1 and introduces "total_bugs_collected" setting it at 0.
+
+while days <= 5:
+    print("Day ", days)
+    each_day = int(input("Number Of Bugs Collected Today: "))
+    print("-----------------------------------")
+    # The above code starts the loop, printing the day and has the user input the number of bugs collected that day.
+    total_bugs_collected = total_bugs_collected + each_day
+    each_day = 0
+    days = days + 1
+
+print("\nThe Total Bugs Collected During The Five Days Was: ", total_bugs_collected)
+# The above code takes the number of bugs collected that day and adds it to the running total for the 5 days. It then
+# resets the bugs collected that day to 0 and increases the day number by 1 before re-performing the loop. After day 5
+# is entered the program prints the total number of bugs collected for the 5 days.

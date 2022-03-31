@@ -1,0 +1,18 @@
+# Joshua Paradie - Homework 2.3 - Total Purchase
+# This is a program that will take the user input for the price of 5 items purchased
+# in the store, the program will then list the subtotal of the sale, the amount of sales
+# tax on the total purchase (7 percent), and also display the total owed after tax
+
+print("\nStore Purchasing \n----------------")
+purchase1 = float(input("Price Of Item 1: "))
+purchase2 = float(input("Price Of Item 2: "))
+purchase3 = float(input("Price Of Item 3: "))
+purchase4 = float(input("Price Of Item 4: "))
+purchase5 = float(input("Price Of Item 5: "))
+print("----------------")
+subtotal_of_sale = purchase1 + purchase2 + purchase3 + purchase4 + purchase5
+print("Subtotal Of Purchase: $", subtotal_of_sale)
+sales_tax = subtotal_of_sale * 0.07
+print("Sales Tax On Purchase: $", sales_tax)
+total_purchase = subtotal_of_sale + sales_tax
+print("The Total Purchase Comes To: $", total_purchase)

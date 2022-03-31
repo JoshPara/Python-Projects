@@ -1,0 +1,34 @@
+# Joshua Paradie - Homework 3.4 - Roman Numerals
+# This is a program that will have the user enter a number in the range of 1 - 10.
+# If the user entered number is in that range, the program will display the corresponding
+# Roman numeral number, if the user entered number is outside that range, an error message
+# will be displayed.
+
+print("Roman Numerals \n--------------")
+user_entered_number = int(input("Enter A Number In The Range Of 1-10: "))
+# The above code has the user enter a number
+if user_entered_number == 1:
+    print("The Roman Numeral Version Of", user_entered_number, "Is I")
+elif user_entered_number == 2:
+    print("The Roman Numeral Version Of", user_entered_number, "Is II")
+elif user_entered_number == 3:
+    print("The Roman Numeral Version Of", user_entered_number, "Is III")
+elif user_entered_number == 4:
+    print("The Roman Numeral Version Of", user_entered_number, "Is IV")
+elif user_entered_number == 5:
+    print("The Roman Numeral Version Of", user_entered_number, "Is V")
+elif user_entered_number == 6:
+    print("The Roman Numeral Version Of", user_entered_number, "Is VI")
+elif user_entered_number == 7:
+    print("The Roman Numeral Version Of", user_entered_number, "Is VII")
+elif user_entered_number == 8:
+    print("The Roman Numeral Version Of", user_entered_number, "Is VIII")
+elif user_entered_number == 9:
+    print("The Roman Numeral Version Of", user_entered_number, "Is IX")
+elif user_entered_number == 10:
+    print("The Roman Numeral Version Of", user_entered_number, "Is X")
+# The above code is for when the user enters a number in the range of 1-10 and displays
+# the corresponding Roman Numeral.
+else:
+    print("Error... Number Entered Is Outside Of The Range Of 1-10")
+# Above is the error message for when the user enters a number not in range

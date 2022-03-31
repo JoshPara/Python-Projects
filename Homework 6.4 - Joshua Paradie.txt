@@ -1,0 +1,39 @@
+# Joshua Paradie - Homework 6.4 - Average of Numbers - 03/22/2022
+# This program will take a file named 'numbers.txt' that exists on the computers' disk. The program will then read all
+# the numbers stored in that file, calculate the total of the numbers on the file, count how many numbers are on the
+# file and divide the total of the numbers by the amount of number to get the average of the numbers.
+
+def main():
+    print('Average Of Numbers \n------------------')
+    total = 0
+    number_counter = 0
+# Creates a main function, prints a title, creates a total counter and a number counter setting both to 0
+
+    for line in open_numbers_file():
+        line = int(line)
+        total = line + total
+        number_counter = number_counter + 1
+    # The above code takes the open_numbers_file function, converts each str line to an int, goes line by line adding
+    # the number from each line to the total sum counter as well as counting how many numbers are in the file.
+
+    average_of_numbers = total / number_counter
+    print(f'The Sum Of The Numbers In numbers.txt File Is: {average_of_numbers}')
+    # The above code determines the average of the numbers by taking the sum of the numbers and dividing it by how many
+    # numbers are in the file to determine the average, then it prints the average of all the numbers in the numbers.txt
+    # file.
+
+
+def open_numbers_file():
+    numbers = open('numbers.txt', 'r')
+    content_of_file = numbers.read()
+    numbers.close()
+# Above code opens numbers.txt in read only, reads and saves the contents and then closes the file.
+
+    content_of_file = content_of_file.split('\n')
+    return content_of_file
+    # The above code splits the saved info by the '\n' character and returns the contents of the file.
+
+
+if __name__ == '__main__':
+    main()
+# The above code calls in main

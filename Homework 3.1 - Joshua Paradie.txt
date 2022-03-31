@@ -1,0 +1,26 @@
+# Joshua Paradie - Homework 3.1 - Day of the Week
+# This is a program that will take the user input of a number ranging from 1-7
+# the program will display the corresponding day of the week with that number
+# inputted. If a number other than 1-7 is inputted the program will display
+# an error message
+
+entered_number = int(input("Enter A Number In The Range of 1-7: "))
+# User Input Statement
+if entered_number == 1:
+    print("Monday")
+elif entered_number == 2:
+    print("Tuesday")
+elif entered_number == 3:
+    print("Wednesday")
+elif entered_number == 4:
+    print("Thursday")
+elif entered_number == 5:
+    print("Friday")
+elif entered_number == 6:
+    print("Saturday")
+elif entered_number == 7:
+    print("Sunday")
+# Above is the code for numbers 1-7
+else:
+    print("Number Entered Not In The Range Of 1-7!!!")
+# Above is the code for if the number is out of range

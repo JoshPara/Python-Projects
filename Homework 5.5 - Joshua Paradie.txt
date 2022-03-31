@@ -1,0 +1,42 @@
+# Joshua Paradie - Homework 5.5 - Random number guessing game - 2/22/22
+# This program will generate a random number in the range of 1 to 100. The program will then ask the user to input a
+# guess of what they think the number is. The program will either tell the user their guess is too high, too low, or
+# that they got it correct. If the guess is too high or too low the program will allow the user to keep guessing until
+# they guess correctly. When the user guesses correctly the program will tell the user how many tries it took them to
+# guess the number and then the program will generate another random number and repeat the game.
+
+import random
+selection = 0
+number_of_guesses = 0
+# Above code importing "random" and creates 2 variables
+
+while selection != 1:
+    print("\nRandom Number Guessing Game: Number In Range Of 1 To 100 \n"
+          "---------------------------------------------------------")
+    number_to_guess = random.randint(1, 100)
+    guessed_number = 0
+# The above code creates a loop to loop the game, generates a random number, and sets/resets the guessed number to 0
+
+    while guessed_number != number_to_guess:
+        guessed_number = int(input("Guess A Number: "))
+        number_of_guesses = number_of_guesses + 1
+    # The above code creates a loop for the game being played, to have the user keep guessing until they get it correct,
+    # as well and keeping track of the number of guesses.
+
+        if guessed_number == number_to_guess:
+            print(f"Congratulations! The Number Was {number_to_guess}! You Guessed The Number Right!!!")
+            print(f"It Took You {number_of_guesses} Guesses Before Getting It Right.")
+            print("\nNew Game Beginning...\n")
+            number_of_guesses = 0
+            break
+        # The above code is for if the user guesses the number correctly, prints the congratulations statement, prints
+        # the number of tries, resets number of guesses to 0 and breaks out of this loop to start a new game.
+
+        elif guessed_number > number_to_guess:
+            print("Wrong Number!!! Number Is Too High!!!")
+
+        else:
+            print("Wrong Number!!! Number Is Too Low!!!")
+        # The above two statements are for when the user guesses too low or two high, both will display a message
+        # telling the user such.
+

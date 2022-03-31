@@ -1,0 +1,16 @@
+# Joshua Paradie - Homework 2.4 - Distance Traveled
+# This program will run calculations for the distance a car travels down the interstate
+# after 6 hours, after 10 hours, and after 15 hours. The program will use the calculation
+# distance = speed x time. Speed for this program is a constant of 70 miles per hour.
+# There will be no user input on this program since it is just a program to calculate and
+# display the distance the car will travel
+
+print("\nDistance Traveled Calculations: \n-------------------------------")
+time_6_hours = 70 * 6
+time_10_hours = 70 * 10
+time_15_hours = 70 * 15
+# The 3 calculations above are to calculate the distance the car will drive after 6, 10, and 15 Hours
+print("The Car Driving 70 Miles Per Hour:")
+print("After 6 Hours The Car Will Have Traveled", time_6_hours, "Miles")
+print("After 10 Hours The Car Will Have Traveled", time_10_hours, "Miles")
+print("After 15 Hours The Car WIll Have Traveled", time_15_hours, "Miles")

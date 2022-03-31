@@ -1,0 +1,16 @@
+# Joshua Paradie - Homework 3.6 - Magic Dates
+# This program has the user enter a month, day and a 2 digit year in numeric form. The program then determines
+# whether the month x the day = the year. If it does, the program displays a message that the date is magic,
+# if it doesn't equal the year the program displays a message that the date is not magic
+
+print("Magic Dates \n-----------")
+user_Entered_Month = int(input("Enter The Month In Numeric Form: "))
+user_Entered_Day = int(input("Enter The Day In Numeric Form: "))
+user_Entered_Year = int(input("Enter The Year In Two-Digit Form: "))
+# The code above has the user enter the month, day, and year all in numeric form
+if user_Entered_Month * user_Entered_Day == user_Entered_Year:
+    print("This Date Is Magic!!")
+# The code above calculates if the month * the day = the year, if it does it will display the magic message
+else:
+    print("This Date Is Not Magic!!")
+# The code above is for if the date is not magic

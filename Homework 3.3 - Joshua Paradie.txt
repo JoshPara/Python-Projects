@@ -1,0 +1,19 @@
+# Joshua Paradie - Homework 3.3 - Age Classifier
+# This is a program that will have the user enter a person's age and then depending on the age entered the program
+# will tell the user if the person is classified as an infant, child, teenager, or an adult, depending on age entered
+
+print("Age Classifier \n--------------")
+user_Entered_Age = float(input("Enter The Age Of The Person: "))
+# The above code has the user enter the age of the person
+if user_Entered_Age <= 1 and user_Entered_Age >= 0:
+    print("The Person Is An Infant")
+elif user_Entered_Age > 1 and user_Entered_Age < 13:
+    print("The Person Is A Child")
+elif user_Entered_Age >= 13 and user_Entered_Age < 20:
+    print("The Person Is A Teenager")
+elif user_Entered_Age >= 20:
+    print("The Person Is An Adult")
+# The above code determines which age to classify the person at depending on the user entered age
+else:
+    print("Invalid Age... Age Cannot Be Less Than 0...")
+# The above code makes sure the age entered is a valid age of a person. A person can't be less than 0 years old

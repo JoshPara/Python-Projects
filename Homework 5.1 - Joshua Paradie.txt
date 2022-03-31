@@ -1,0 +1,29 @@
+# Joshua Paradie - Homework 5.1 - Odd/Even Counter - 2/21/2022
+# This program will generate 100 random numbers and keep track of how many even numbers are generated as well as how
+# many odd numbers are generated.
+
+import random
+counter = 0
+odd_number = 0
+even_number = 0
+# The above code imports "random" so that a random number can be generated. Also, it creates 3 variable, counter,
+# odd_number, and even_number, all of which are used to keep a tally of different things.
+
+print("\nOdd/Even Counter \n----------------")
+
+while counter < 100:
+    random_number = random.randint(1, 100000)
+    print(random_number)
+    counter = counter + 1
+    if (random_number % 2) == 0:
+        even_number = even_number + 1
+    else:
+        odd_number = odd_number + 1
+    random_number = 0
+# The above code is a while loop that loops 100 times, each time it generates and prints a random number between
+# 1-100000, increases the counter by one, and then determines if the random number is odd or even and increases the
+# count for the correct variable.
+
+print(f"There Are {odd_number} Odd Numbers")
+print(f"There Are {even_number} Even Numbers")
+# The above code prints how many odd number are generated and the number of even numbers generated.

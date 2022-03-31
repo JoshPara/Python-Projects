@@ -1,0 +1,21 @@
+# Joshua Paradie - Homework 4.6 - Nested Loops to draw a pattern - 02/15/2022
+# This program will draw a pattern using nested loops
+
+star_line_count = 7
+# Number of star lines set to 7 because of the 7 lines in the picture (7,6,5,4,3,2,1)
+
+while star_line_count > 0:
+    star_count_per_line = star_line_count
+    # Above is the first loop using the parameter that it'll loop until there isn't supposed to be lines left (aka at 0)
+    # Above code also sets the number of stars per line to be equal how many lines of stars are left. (starting there
+    # will be 7 stars per line and 7 lines, next line has 6 stars and there are 6 lines including that one remaining)
+    # This first loops purpose is to know when to switch to the new line and when to end the program.
+    while star_count_per_line > 0:
+        print("*", end='')
+        star_count_per_line = star_count_per_line - 1
+        # This is the nested loop charge of printing the correct number of stars for each line. "print("*", end='')"
+        # is used in this second in order to make sure every time this nested loop repeats it prints the stars on the
+        # same line without the newline character.
+    star_line_count = star_line_count - 1
+    print()
+    # Lines remaining is decreased by one and a new line is started.

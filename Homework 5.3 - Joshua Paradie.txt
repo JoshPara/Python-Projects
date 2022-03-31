@@ -1,0 +1,35 @@
+# Joshua Paradie - Homework 5.3 - Prime Number List - 2/22/22
+# This program will take the function created for Homework 5.2 to determine if a number is a prime number or not. It
+# will use that function in a loop to display all the prime numbers from 1 to 100.
+
+def is_prime(entered_number):
+    counter = 2
+    prime_number = 1
+
+    if entered_number > 1:
+        while counter < entered_number:
+            if entered_number % counter == 0:
+                return 0
+            else:
+                counter = counter + 1
+
+        if prime_number == 1:
+            return 1
+
+    else:
+        return 0
+# The above code is the "is_prime" function created for Homework 5.2. All notes on this function can be found in 5.2.
+
+
+print("\nPrime Number List: 1 to 100 \n---------------------------")
+counter_to_100 = 0
+# The above code creates a variable to be used as a counter to be used in the below loop.
+
+while counter_to_100 <= 100:
+    is_prime(counter_to_100)
+    if is_prime(counter_to_100) == 1:
+        print(counter_to_100)
+    counter_to_100 = counter_to_100 + 1
+# The above loop uses the function above to determine and display all the prime number from 1 to 100 by looping through
+# every number 1-100, putting that number into the function and using that function to determine if it's a prime number.
+
