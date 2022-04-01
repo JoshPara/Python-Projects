@@ -1,0 +1,66 @@
+# Joshua Paradie - Homework 7.3 - Number Analysis Program - 03/31/2022
+# This program will have the user enter 20 numbers which will be stored in a list. The following data will then be
+# displayed: The lowest number, the highest number, the total of the numbers, the average of the numbers in the list.
+
+def main():
+    print('\nNumber Analysis Program\n-----------------------')
+    numbers = user_entered_numbers()
+    # Calls the function and saved the returned list of numbers
+
+    print('\nAnalysis\n--------')
+    print(f'The Lowest Number In The List Is: {lowest_number(numbers)}')
+    # Calls the lowest number function and prints the lowest number using the passed lowest number from the function
+
+    print(f'The Highest Number In The List Is: {highest_number(numbers)}')
+    # Calls the highest number function, printing the highest number using the passed highest number from the function
+
+    total_num = total_numbers(numbers)
+    print(f'The Total Of The Numbers In The List Is: {total_num}')
+    # Calls the function to find the total of the numbers, saves the return and prints the total of the numbers
+
+    print(f'The Average of the Numbers In The List Is: {average_numbers(total_num):.2f}')
+    # Calls the average number function, printing the returned average number from the function
+
+
+def user_entered_numbers():
+    numbers_list = []
+    counter = 1
+    while counter != 21:
+        user_enter = float(input(f'Enter Number {counter}: '))
+        numbers_list.append(user_enter)
+        counter += 1
+    return numbers_list
+# Has the user enter 20 numbers into a list and returns that list
+
+
+def lowest_number(number_list):
+    min_number = min(number_list)
+    return min_number
+# Finds the lowest number in the user entered number list and returns the minimum number
+
+
+def highest_number(number_list):
+    max_number = max(number_list)
+    return max_number
+# Finds the highest number in the user entered list and returns the highest number
+
+
+def total_numbers(number_list):
+    total = 0
+    counter = 0
+    while counter != 20:
+        total += number_list[counter]
+        counter += 1
+    return total
+# Finds the total of the numbers in the list by looping through the list and adding it to the total
+
+
+def average_numbers(totals):
+    average = totals / 20
+    return average
+# Find the average of the numbers of the list by taking the passed total and dividing by 20 since there are 20 numbers
+
+
+if __name__ == '__main__':
+    main()
+# Calls in main

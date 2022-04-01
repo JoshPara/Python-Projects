@@ -1,0 +1,45 @@
+# Joshua Paradie - Homework 7.1 - Lottery Generator - 03/28/2022
+# This program will generate a random 7 digit lottery number, each number will be in the range of 0-9. Each number in
+# the 7 digit lottery number will be associated with a list element. After this number is generated, a loop will display
+# the contents of the list
+
+def main():
+    print('Lottery Generator\n-----------------')
+    lottery_list = generate_lottery_number()
+    # The above code takes the 7 passed numbers from the 'generate_lottery_number' function and stores them in a list.
+
+    colors_list = ['Red', 'Orange', 'Yellow', 'Green', 'Blue', 'Purple', 'Black', 'White', 'Magenta', 'Mustard']
+    # Creates a list with content, so it can be referenced later.
+
+    print('--------------------------------------')
+    print('Contents of List Associated With Random Numbers')
+    counter = 0
+    while counter != 7:
+        print(f'{lottery_list[counter]} = ', end='')
+        temp = lottery_list[counter]
+        print(f'{colors_list[temp]}')
+        counter += 1
+        # The above loop takes the first lottery number prints it, then the associated list element is printed and the
+        # program loops until all the numbers have been run through.
+
+
+def generate_lottery_number():
+    import random
+    print('Random Lottery Numbers Are:')
+    num1 = random.randint(0, 9)
+    num2 = random.randint(0, 9)
+    num3 = random.randint(0, 9)
+    num4 = random.randint(0, 9)
+    num5 = random.randint(0, 9)
+    num6 = random.randint(0, 9)
+    num7 = random.randint(0, 9)
+    # Generates and saves 7 random numbers
+
+    print(f'{num1}, {num2}, {num3}, {num4}, {num5}, {num6}, {num7}')
+    return num1, num2, num3, num4, num5, num6, num7
+    # Prints the 7 random numbers and returns
+
+
+if __name__ == '__main__':
+    main()
+    # Calls in main

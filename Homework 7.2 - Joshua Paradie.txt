@@ -1,0 +1,91 @@
+# Joshua Paradie - Homework 7.2 - Rainfall Statistics - 3/31/2022
+# This is a program that will have the user enter the total rainfall for each of the 12 months into a list. The program
+# will then calculate and display the total rainfall for the year as well as the average monthly rainfall and the months
+# with the highest and lowest amount
+
+def main():
+    print('Rainfall Statistics\n-------------------')
+    months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',
+              'November', 'December']
+    # Creates a list of months in a year
+
+    rainfall_months = user_entered_data(months)
+    # Calls in the function for the users entered data, passes the months list, and saves the returned list
+
+    total_yearly_rain = total_rainfall(rainfall_months)
+    # Calls in the function for total rainfall, passes the user entered data, and saves the returned total
+
+    print('-------------------')
+    print(f'\nThe Total Rainfall For The Year Was: {total_yearly_rain} Inches')
+    # Prints the total rainfall for the year
+
+    average_monthly_rainfall = total_yearly_rain / 12
+    print(f'\nThe Average Monthly Rainfall Is: {average_monthly_rainfall:.2f} Inches')
+    # Calculates the average monthly rainfall by taking the total and dividing by 12 months. The average is then printed
+
+    highest_rain = highest_amount_of_rainfall(rainfall_months)
+    counter = 0
+    multiple_max = []
+    while counter != 12:
+        if rainfall_months[counter] == highest_rain:
+            multiple_max.append(months[counter])
+        counter += 1
+    print(f'\nThe Month/s With the Most Rain Is/Are {multiple_max} Getting {highest_rain} Inches')
+    # Above code is calling the highest rainfall function, passing the user entered data, and returning the highest
+    # amount of rain as it's saved in a variable 'highest_rain'. A new list is created to hold months incase there are
+    # several months with the same highest rain amount. The while loop then loops through the user inputted data,
+    # comparing each list item to the highest rain, whenever there is a match that month associated is added to the list
+
+    lowest_rain = lowest_amount_of_rainfall(rainfall_months)
+    counter = 0
+    multiple_min = []
+    while counter != 12:
+        if rainfall_months[counter] == lowest_rain:
+            multiple_min.append(months[counter])
+        counter += 1
+    print(f'\nThe Month/s With The Least Rain Is/Are {multiple_min} Getting {lowest_rain} Inches')
+    # The above code is a mirror of the code block above, except instead of the max its running for the minimum amount
+    # of rainfall.
+
+
+def user_entered_data(yearly_months):
+    months_rain = []
+    counter = 0
+    while counter != 12:
+        user_enter = float(input(f'Enter The Total Amount of Rainfall In {yearly_months[counter]} In Inches: '))
+        if user_enter < 0:
+            print('\nError!! Rainfall Amount Must Be 0 Inches Or More!\n')
+            continue
+        else:
+            months_rain.append(user_enter)
+            counter += 1
+    return months_rain
+# This code has the user enter the amount of rainfall for each month in the year, the loop does this by looping 12 times
+# and passes the months list from main. The loop also checks to make sure the user didn't enter an invalid number '< 0'
+
+
+def total_rainfall(rainy_months):
+    total = 0
+    for x in range(12):
+        temp = int(rainy_months[x])
+        total += temp
+    return total
+# Takes the user entered rainfall, loops through the list and adds each amount to a total. Once the loop is done it
+# returns the total to main
+
+
+def highest_amount_of_rainfall(rainy_months):
+    highest_rain = max(rainy_months)
+    return highest_rain
+# Takes the user entered rainfall, finds the most amount and returns it
+
+
+def lowest_amount_of_rainfall(rainy_months):
+    least_rain = min(rainy_months)
+    return least_rain
+# Takes user entered rainfall, finds the least amount and returns it
+
+
+if __name__ == '__main__':
+    main()
+# Calls in the main function
