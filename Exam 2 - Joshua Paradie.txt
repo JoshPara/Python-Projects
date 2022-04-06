@@ -1,0 +1,232 @@
+# Joshua Paradie - Exam 2 - 4/6/2022
+# This program is used to create a personal fitness tracker that takes a file 'steps.txt' as an input. This program then
+# reads and calculates the average number of steps taken for each month. It will then store the average data with each
+# month's name in a file called 'Avg Steps.txt' and close the file. The average data for each month will then be printed
+# My name will then be added to Avg Steps file.
+
+def main():
+    open_and_copy_file()
+    # Calls in the function
+
+    printing_data = open('Avg Steps.txt', 'r')
+    printing_data = printing_data.read()
+    print(printing_data)
+    # Opens the file for reading, reads the data, and prints it in a list
+
+
+def open_and_copy_file():
+    months_names = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',
+                    'November', 'December']
+    # Creates a list to be used for months
+
+    counter = 0
+    month = 0
+    total_steps = 0
+    # Creates trackers to keep track of certain things
+
+    steps_file = open('steps.txt', 'r')
+    avg_steps = open('Avg Steps.txt', 'w')
+    avg_steps.write('\nName: Joshua Paradie\n')
+    avg_steps.write('\nAverage Steps Taken Program\n---------------------------\n')
+    # Opens the data file for reading and opens the new file for writing, adds my name to the writing file and adds a
+    # header
+
+    while counter != 31:
+        days = steps_file.readline()
+        days = int(days)
+        total_steps += days
+        counter += 1
+    # Uses a counter to keep track of the days, reads the file associated with the counter, changes from str to int,
+    # adds data for that day to the running total
+
+    if counter == 31:
+        average_steps = total_steps / 31
+        avg_steps.write(f'{months_names[month]} \t {average_steps:.2f} \n')
+        month += 1
+    # January: uses a counter to keep track of it, divides the total for the month by the associated number of days,
+    # writes the month and the average number of steps to the writing file, increases the counter
+
+    total_steps = 0
+    while counter != 59:
+        days = steps_file.readline()
+        days = int(days)
+        total_steps += days
+        counter += 1
+    # Uses a counter to keep track of the days, reads the file associated with the counter, changes from str to int,
+    # adds data for that day to the running total
+
+    if counter == 59:
+        average_steps = total_steps / 28
+        avg_steps.write(f'{months_names[month]} \t {average_steps:.2f} \n')
+        month += 1
+    # February: uses a counter to keep track of it, divides the total for the month by the associated number of days,
+    # writes the month and the average number of steps to the writing file, increases the counter
+
+    total_steps = 0
+    while counter != 90:
+        days = steps_file.readline()
+        days = int(days)
+        total_steps += days
+        counter += 1
+    # Uses a counter to keep track of the days, reads the file associated with the counter, changes from str to int,
+    # adds data for that day to the running total
+
+    if counter == 90:
+        average_steps = total_steps / 31
+        avg_steps.write(f'{months_names[month]} \t\t {average_steps:.2f} \n')
+        month += 1
+    # March: uses a counter to keep track of it, divides the total for the month by the associated number of days,
+    # writes the month and the average number of steps to the writing file, increases the counter
+
+    total_steps = 0
+    while counter != 120:
+        days = steps_file.readline()
+        days = int(days)
+        total_steps += days
+        counter += 1
+    # Uses a counter to keep track of the days, reads the file associated with the counter, changes from str to int,
+    # adds data for that day to the running total
+
+    if counter == 120:
+        average_steps = total_steps / 30
+        avg_steps.write(f'{months_names[month]} \t\t {average_steps:.2f} \n')
+        month += 1
+    # April: uses a counter to keep track of it, divides the total for the month by the associated number of days,
+    # writes the month and the average number of steps to the writing file, increases the counter
+
+    total_steps = 0
+    while counter != 151:
+        days = steps_file.readline()
+        days = int(days)
+        total_steps += days
+        counter += 1
+    # Uses a counter to keep track of the days, reads the file associated with the counter, changes from str to int,
+    # adds data for that day to the running total
+
+    if counter == 151:
+        average_steps = total_steps / 31
+        avg_steps.write(f'{months_names[month]} \t\t {average_steps:.2f} \n')
+        month += 1
+    # May: uses a counter to keep track of it, divides the total for the month by the associated number of days,
+    # writes the month and the average number of steps to the writing file, increases the counter
+
+    total_steps = 0
+    while counter != 181:
+        days = steps_file.readline()
+        days = int(days)
+        total_steps += days
+        counter += 1
+    # Uses a counter to keep track of the days, reads the file associated with the counter, changes from str to int,
+    # adds data for that day to the running total
+
+    if counter == 181:
+        average_steps = total_steps / 30
+        avg_steps.write(f'{months_names[month]} \t\t {average_steps:.2f} \n')
+        month += 1
+    # June: uses a counter to keep track of it, divides the total for the month by the associated number of days,
+    # writes the month and the average number of steps to the writing file, increases the counter
+
+    total_steps = 0
+    while counter != 212:
+        days = steps_file.readline()
+        days = int(days)
+        total_steps += days
+        counter += 1
+    # Uses a counter to keep track of the days, reads the file associated with the counter, changes from str to int,
+    # adds data for that day to the running total
+
+    if counter == 212:
+        average_steps = total_steps / 31
+        avg_steps.write(f'{months_names[month]} \t\t {average_steps:.2f} \n')
+        month += 1
+    # July: uses a counter to keep track of it, divides the total for the month by the associated number of days,
+    # writes the month and the average number of steps to the writing file, increases the counter
+
+    total_steps = 0
+    while counter != 243:
+        days = steps_file.readline()
+        days = int(days)
+        total_steps += days
+        counter += 1
+    # Uses a counter to keep track of the days, reads the file associated with the counter, changes from str to int,
+    # adds data for that day to the running total
+
+    if counter == 243:
+        average_steps = total_steps / 31
+        avg_steps.write(f'{months_names[month]} \t\t {average_steps:.2f} \n')
+        month += 1
+    # August: uses a counter to keep track of it, divides the total for the month by the associated number of days,
+    # writes the month and the average number of steps to the writing file, increases the counter
+
+    total_steps = 0
+    while counter != 273:
+        days = steps_file.readline()
+        days = int(days)
+        total_steps += days
+        counter += 1
+    # Uses a counter to keep track of the days, reads the file associated with the counter, changes from str to int,
+    # adds data for that day to the running total
+
+    if counter == 273:
+        average_steps = total_steps / 30
+        avg_steps.write(f'{months_names[month]} \t {average_steps:.2f} \n')
+        month += 1
+    # September: uses a counter to keep track of it, divides the total for the month by the associated number of days,
+    # writes the month and the average number of steps to the writing file, increases the counter
+
+    total_steps = 0
+    while counter != 304:
+        days = steps_file.readline()
+        days = int(days)
+        total_steps += days
+        counter += 1
+    # Uses a counter to keep track of the days, reads the file associated with the counter, changes from str to int,
+    # adds data for that day to the running total
+
+    if counter == 304:
+        average_steps = total_steps / 31
+        avg_steps.write(f'{months_names[month]} \t {average_steps:.2f} \n')
+        month += 1
+    # October: uses a counter to keep track of it, divides the total for the month by the associated number of days,
+    # writes the month and the average number of steps to the writing file, increases the counter
+
+    total_steps = 0
+    while counter != 334:
+        days = steps_file.readline()
+        days = int(days)
+        total_steps += days
+        counter += 1
+    # Uses a counter to keep track of the days, reads the file associated with the counter, changes from str to int,
+    # adds data for that day to the running total
+
+    if counter == 334:
+        average_steps = total_steps / 30
+        avg_steps.write(f'{months_names[month]} \t {average_steps:.2f} \n')
+        month += 1
+    # November: uses a counter to keep track of it, divides the total for the month by the associated number of days,
+    # writes the month and the average number of steps to the writing file, increases the counter
+
+    total_steps = 0
+    while counter != 365:
+        days = steps_file.readline()
+        days = int(days)
+        total_steps += days
+        counter += 1
+    # Uses a counter to keep track of the days, reads the file associated with the counter, changes from str to int,
+    # adds data for that day to the running total
+
+    if counter == 365:
+        average_steps = total_steps / 31
+        avg_steps.write(f'{months_names[month]} \t {average_steps:.2f} \n')
+        month += 1
+    # December: uses a counter to keep track of it, divides the total for the month by the associated number of days,
+    # writes the month and the average number of steps to the writing file, increases the counter
+
+    avg_steps.close()
+    steps_file.close()
+# Closes both open files
+
+
+if __name__ == '__main__':
+    main()
+# Calls Main
