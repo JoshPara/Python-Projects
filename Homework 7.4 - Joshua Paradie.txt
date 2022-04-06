@@ -1,0 +1,63 @@
+# Joshua Paradie - Homework 7.4 - Larger Than N - 03/31/2022
+# This program will have a function that accepts 2 arguments: a list and a number 'n'.
+# The list will contain numbers and the function will display all the numbers in the list that are greater than the
+# number 'n'.
+
+def main():
+    exception_in_main()
+# Calls in exception function
+
+
+def exception_in_main():
+    try:
+        print('\nLarger Than N:\n--------------')
+        numbers_in_list = int(input('Enter The Amount of Randomly Generated Numbers: '))
+        number_list = create_list(numbers_in_list)
+        n_variable = float(input('Enter A Number: '))
+        larger_than_n(numbers_in_list, n_variable, number_list)
+    # Calls in the function that has 2 arguments
+
+    except ValueError:
+        print('ValueError: Error Converting Input To A Number')
+        pass
+    # Accounts for ValueError Exceptions
+
+    else:
+        print('\nThere Are No Exceptions Raised In File...')
+        pass
+    # If there are no exceptions raised then it prints that message
+
+
+def create_list(numbers):
+    import random
+    created_list = []
+    counter = 0
+    while counter != numbers:
+        temp = random.randint(1, 1000)
+        created_list.append(temp)
+        counter += 1
+    return created_list
+# Function that creates a list of random numbers, the amount of numbers in the list is dictated by the user, the list is
+# returned to main
+
+
+def larger_than_n(total_numbers, n, num_list):
+    counter = 0
+    print(f'\nThe Numbers From The List That Are Larger Than {n}:\n---------------------------------------------------')
+    while counter != total_numbers:
+        if num_list[counter] > n:
+            print(num_list[counter])
+            counter += 1
+        else:
+            counter += 1
+            continue
+    # Function that accepts 2 arguments: A list and a user chosen number. The above code then prints all numbers in the
+    # list that are greater than the user chosen number.
+
+    print(f'\nDone Printing Higher Numbers Than {n} From List')
+    # Success message is displayed once completed
+
+
+if __name__ == '__main__':
+    main()
+# Calls in main

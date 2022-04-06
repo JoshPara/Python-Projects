@@ -1,0 +1,180 @@
+# Joshua Paradie - Homework 7.5 - Lo Shu Magic Square
+# This program will test if the grid created (with numbers 1 through 9 exactly) is a magic square, to be a magic square
+# all rows, vertically, diagonally, and horizontally, must all add up to the same number (15)
+
+def main():
+    flag = 'false'
+    while flag == 'false':
+        flag = 'true'
+    # Creates a flag so that the program will loop if an error occurs instead of just exiting
+
+        try:
+            main_program()
+        # Call the main program in and try it
+
+        except ValueError:
+            print('An Invalid Number Was Detected! Make Sure The Numbers Entered Are Only 1 Through 9 And Each Number '
+                  'Is only Used Once!')
+            flag = 'false'
+        # Uses an exception to check to make sure there are not any value errors in the program during runtime
+
+        except IndexError:
+            print('List Index Out Of Range')
+            flag = 'false'
+        # Uses an exception to check if there are any index errors that occur in the program during runtime
+
+
+def main_program():
+    user_menu_choice = 1
+    # This is the main program that will run
+
+    while user_menu_choice == 1:
+        menu()
+        user_menu_choice = int(input('Selection: '))
+    # A while loop is created so that the program can be run multiple times, menu function is called, user selection
+
+        if user_menu_choice == 1:
+            numbers_list = user_created_list()
+            magic_square(numbers_list)
+            continue
+        # If the user choose selection 1 this code is activated, it calls the function for the user to create a list
+        # themselves, it saved the returned list and then uses that returned list to check if it's a magic square
+
+        if user_menu_choice == 2:
+            numbers_list = list_generation()
+            magic_square(numbers_list)
+            user_menu_choice = 1
+            continue
+        # If the user chooses selection 2 this code is run, it calls in the function for a random list to be created,
+        # it saves the returned list and then uses that returned list to check if it's a magic square
+
+        if user_menu_choice == 3:
+            print('Program Exiting!!!')
+        # If the user chooses selection 3 this code is run, it changes the selection so that the loop won't run again,
+        # and it exits the program.
+
+        else:
+            print('Error! Invalid Selection!\n')
+            user_menu_choice = 1
+        # If the user chooses any other selection not listed, the program will display an error message and loop again
+
+
+def menu():
+    print('\nLo Shu Magic Square\n-------------------')
+    print('1. Enter Your Own Order Of The Numbers 1-9 Into The List')
+    print('2. Have The Order Of The Numbers 1-9 Randomly Generated Into The List')
+    print('3. Exit Program')
+# Creates a menu for the user to select a choice
+
+
+def user_created_list():
+    user_list = []
+    ordered_list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    counter = 0
+    # A blank list is created, a list with all the available numbers is created, and a counter is created
+
+    while counter != 9:
+        entered_number = int(input('Enter A Number 1 through 9, Can Only Be Entered Once: '))
+        # Program enters a while loop to loop 9 times so the user can enter the 9 numbers, it takes the user input each
+        # loop and saves it as a variable.
+
+        if entered_number in ordered_list:
+            user_list.append(entered_number)
+            ordered_list.remove(entered_number)
+            counter += 1
+        # This checks if the user entered number is one of the available numbers in the list of numbers, if it is, it
+        # enters this code, saves the user inputted number into the list being created and removes the user entered
+        # number from the list of numbers. It then adds one to the counter
+
+        else:
+            print('Number Invalid!')
+        # If the user entered number is not one of the available numbers in the list of numbers (whether it be that the
+        # number was already entered or if the number is outside the range, it displays this error message and then
+        # loops again
+
+    return user_list
+    # Returns the completed list of numbers the user entered.
+
+
+def list_generation():
+    import random
+    ordered_list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    random_list = []
+    count = 8
+    # This function creates a random list, random library is called in, a list of all numbers is created, a blank listed
+    # is created and a counter is created
+
+    while count != -1:
+        random_number = random.randint(0, count)
+        temp_number = ordered_list[random_number]
+        ordered_list.remove(temp_number)
+        random_list.append(temp_number)
+        count -= 1
+    # This while loop keeps track to make sure it loops 9 times, a random number between 1-9 is generated and saved.
+    # That random number is used to pull the associated number from the list of numbers and saved. That number is then
+    # removed from the list of numbers and appended to the blank list that is being generated. The count is then
+    # decreased by 1 to account for the number being removed from the list of numbers.
+
+    return random_list
+    # The random list that is generated is returned
+
+
+def magic_square(num_list):
+    print(num_list)
+    tracker = 0
+    # This function is used to test if the list is a magic number or not. The list is printed and a tracker created to
+    # determine whether it is a magic square
+
+    first_row = num_list[0] + num_list[1] + num_list[2]
+    if first_row == 15:
+        tracker += 1
+    # Take the first row, adds it up and sees if its = 15, if it is the tracker is increased by 1
+
+    second_row = num_list[3] + num_list[4] + num_list[5]
+    if second_row == 15:
+        tracker += 1
+    # Take the second row, adds it up and sees if its = 15, if it is the tracker is increased by 1
+
+    third_row = num_list[6] + num_list[7] + num_list[8]
+    if third_row == 15:
+        tracker += 1
+    # Take the third row, adds it up and sees if its = 15, if it is the tracker is increased by 1
+
+    first_row_vertical = num_list[0] + num_list[3] + num_list[6]
+    if first_row_vertical == 15:
+        tracker += 1
+    # Take the first row vertically, adds it up and sees if its = 15, if it is the tracker is increased by 1
+
+    second_row_vertical = num_list[1] + num_list[4] + num_list[7]
+    if second_row_vertical == 15:
+        tracker += 1
+    # Take the second row vertically, adds it up and sees if its = 15, if it is the tracker is increased by 1
+
+    third_row_vertical = num_list[2] + num_list[5] + num_list[8]
+    if third_row_vertical == 15:
+        tracker += 1
+    # Take the third row vertically, adds it up and sees if its = 15, if it is the tracker is increased by 1
+
+    diagonal_one = num_list[0] + num_list[4] + num_list[8]
+    if diagonal_one == 15:
+        tracker += 1
+    # Take the first diagonal row, adds it up and sees if its = 15, if it is the tracker is increased by 1
+
+    diagonal_two = num_list[2] + num_list[4] + num_list[6]
+    if diagonal_two == 15:
+        tracker += 1
+    # Take the second diagonal row, adds it up and sees if its = 15, if it is the tracker is increased by 1
+
+    if tracker == 8:
+        print('This List is a Magic Square!!!')
+    # If after all the rows are tested, if the tracker is at 8 then it is a magic square and this message is printed
+
+    else:
+        print('This List Is NOT A Magic Square!!!')
+    # If after all the rows are tested, if the tracker is not at 8 then it is not a magic square and this message is
+    # printed
+
+
+if __name__ == '__main__':
+    main()
+# Calls and runs main
