@@ -1,0 +1,68 @@
+# Joshua Paradie - Homework 8.1 - Course Information - 04/06/2022
+# This program will store information regarding select classes in dictionary and allow the user to type in the course
+# number. If the course number is valid it will print the associated information that goes with that course.
+
+def main():
+    flag = 'false'
+    while flag == 'false':
+        flag = 'true'
+    # Creates a flag and goes into a loop so that if an error occurs the program will loop instead of terminating
+
+        try:
+            main_program()
+        # Tries the main program
+
+        except Exception as err:
+            print(err)
+            flag = 'false'
+        # If an exception is found, that exception is printed and the program loops
+
+
+def main_program():
+    repeat = 'Y'
+    while repeat == 'Y':
+        room_numbers, instructors, times = course_info()
+        u_selection = selection()
+    # While loop for repeating, calls and saves the function containing the dictionary, calls function for user input
+
+        if (u_selection == 'CS101') or (u_selection == 'CS102') or (u_selection == 'CS103') or (u_selection == 'NT110')\
+                or (u_selection == 'CM241'):
+            print(f'\nInformation About Course Number {u_selection}')
+            print('--------------------------------------')
+            print(f'Room Number: {room_numbers[u_selection]}\nInstructor: {instructors[u_selection]}\nMeeting Time: '
+                  f'{times[u_selection]}')
+            repeat = str(input('\nWould You Like To Look Up Another Course? Y/N: '))
+            repeat = repeat.upper()
+        # If the course number is valid it will print the associated information and ask the user if they want to enter
+        # another course number (also change an accidental lowercase to uppercase)
+
+        else:
+            print('Course Number Not Valid!')
+            repeat = str(input('\nWould You Like To Look Up A Different Course? Y/N: '))
+            repeat = repeat.upper()
+        # If the course number is invalid the program will ask the user if they want to try again, if so it'll loop, if
+        # not it will terminate
+
+    print('\nExiting Program...')
+    # Termination
+
+
+def selection():
+    print('\nCourse Information Directory\n----------------------------')
+    user_selection = str(input('Enter The Course Number: '))
+    return user_selection
+# User inputs a choice, returned that choice to main
+
+
+def course_info():
+    course_and_room_numbers = {'CS101': 3004, 'CS102': 4501, 'CS103': 6755, 'NT110': 1244, 'CM241': 1411}
+    course_and_instructors = {'CS101': 'Haynes', 'CS102': 'Alvarado', 'CS103': 'Rich', 'NT110': 'Burke', 'CM241': 'Lee'}
+    course_and_times = {'CS101': '8:00 a.m.', 'CS102': '9:00 a.m.', 'CS103': '10:00 a.m.', 'NT110': '11:00 a.m.',
+                        'CM241': '1:00 p.m.'}
+    return course_and_room_numbers, course_and_instructors, course_and_times
+# Creates 3 dictionary using the same key for each
+
+
+if __name__ == '__main__':
+    main()
+# Calls In Main

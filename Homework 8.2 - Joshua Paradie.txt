@@ -1,0 +1,112 @@
+# Joshua Paradie - Homework 8.2 - Capital Quiz - 04/06/2022
+# This program will have a dictionary containing the states and their associated capitals. The program will randomly
+# quiz the user on what the capital of the state it displays is. The program will keep track of scoring
+
+def main():
+    flag = 'true'
+    while flag == 'true':
+        flag = 'false'
+    # Creates a while loop so that if an error occurs the program loops instead of exiting
+
+        try:
+            states, capitals, numbers = dictionary()
+            wrong = game(states, capitals, numbers)
+            incorrect_file = open('Wrong Answers.txt', 'r')
+            incorrect_file = incorrect_file.read()
+            print(incorrect_file)
+            print(f'You Got {wrong} Out Of 50 Wrong')
+        # Calls the dictionary function and saves the 3 returned dictionaries, calls the game function to save the
+        # number of answers the user got wrong, opens and prints the file that has all the incorrect question data,
+        # along with printing the number they got wrong
+
+        except IOError:
+            print('An Error Has Occurred In The Opening Of The File')
+            flag = 'true'
+        # Accounts For IO Exceptions and loops the program
+
+        except ValueError:
+            print('An Error Has Occurred During Conversions')
+            flag = 'true'
+        # Accounts for ValueError Exceptions and loops the program
+
+
+def dictionary():
+    numbers_and_states = {1: 'ALABAMA', 2: 'ALASKA', 3: 'ARIZONA', 4: 'ARKANSAS', 5: 'CALIFORNIA', 6: 'COLORADO',
+                          7: 'CONNECTICUT', 8: 'DELAWARE', 9: 'FLORIDA', 10: 'GEORGIA', 11: 'HAWAII',
+                          12: 'IDAHO', 13: 'ILLINOIS', 14: 'INDIANA', 15: 'IOWA', 16: 'KANSAS', 17: 'KENTUCKY',
+                          18: 'LOUISIANA', 19: 'MAINE', 20: 'MARYLAND', 21: 'MASSACHUSETTS', 22: 'MICHIGAN',
+                          23: 'MINNESOTA', 24: 'MISSISSIPPI', 25: 'MISSOURI', 26: 'MONTANA', 27: 'NEBRASKA',
+                          28: 'NEVADA', 29: 'NEW HAMPSHIRE', 30: 'NEW JERSEY', 31: 'NEW MEXICO', 32: 'NEW YORK',
+                          33: 'NORTH CAROLINA', 34: 'NORTH DAKOTA', 35: 'OHIO', 36: 'OKLAHOMA', 37: 'OREGON',
+                          38: 'PENNSYLVANIA', 39: 'RHODE ISLAND', 40: 'SOUTH CAROLINA', 41: 'SOUTH DAKOTA',
+                          42: 'TENNESSEE', 43: 'TEXAS', 44: 'UTAH', 45: 'VERMONT', 46: 'VIRGINIA', 47: 'WASHINGTON',
+                          48: 'WEST VIRGINA', 49: 'WISCONSIN', 50: 'WYOMING'}
+    # Creates a dictionary of the states associated with a number
+
+    states_and_capitals = {'ALABAMA': 'MONTGOMERY', 'ALASKA': 'JUNEAU', 'ARIZONA': 'PHOENIX', 'ARKANSAS': 'LITTLE ROCK',
+                           'CALIFORNIA': 'SACRAMENTO', 'COLORADO': 'DENVER', 'CONNECTICUT': 'HARTFORD',
+                           'DELAWARE': 'DOVER', 'FLORIDA': 'TALLAHASSEE', 'GEORGIA': 'ATLANTA', 'HAWAII': 'HONOLULU',
+                           'IDAHO': 'BOISE', 'ILLINOIS': 'SPRINGFIELD', 'INDIANA': 'INDIANAPOLIS', 'IOWA': 'DES MOINES',
+                           'KANSAS': 'TOPEKA', 'KENTUCKY': 'FRANKFORT', 'LOUISIANA': 'BATON ROUGE', 'MAINE': 'AUGUSTA',
+                           'MARYLAND': 'ANNAPOLIS', 'MASSACHUSETTS': 'BOSTON', 'MICHIGAN': 'LANSING',
+                           'MINNESOTA': 'SAINT PAUL', 'MISSISSIPPI': 'JACKSON', 'MISSOURI': 'JEFFERSON CITY',
+                           'MONTANA': 'HELENA', 'NEBRASKA': 'LINCOLN', 'NEVADA': 'CARSON CITY',
+                           'NEW HAMPSHIRE': 'CONCORD', 'NEW JERSEY': 'TRENTON', 'NEW MEXICO': 'SANTA FE',
+                           'NEW YORK': 'ALBANY', 'NORTH CAROLINA': 'RALEIGH', 'NORTH DAKOTA': 'BISMARCK',
+                           'OHIO': 'COLUMBUS', 'OKLAHOMA': 'OKLAHOMA CITY', 'OREGON': 'SALEM',
+                           'PENNSYLVANIA': 'HARRISBURG', 'RHODE ISLAND': 'PROVIDENCE', 'SOUTH CAROLINA': 'COLUMBUS',
+                           'SOUTH DAKOTA': 'PIERRE', 'TENNESSEE': 'NASHVILLE', 'TEXAS': 'AUSTIN',
+                           'UTAH': 'SALT LAKE CITY', 'VERMONT': 'MONTPELIER', 'VIRGINIA': 'RICHMOND',
+                           'WASHINGTON': 'OLYMPIA', 'WEST VIRGINA': 'CHARLESTON', 'WISCONSIN': 'MADISON',
+                           'WYOMING': 'CHEYENNE'}
+    # Creates a dictionary for the states and their capital
+
+    numbers_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27,
+                    28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50]
+    # Creates a dictionary for the numbers 1 through 50
+
+    return numbers_and_states, states_and_capitals, numbers_list
+    # Returns all 3 dictionaries
+
+
+def game(all_states, all_capitals, all_numbers):
+    import random
+    wrong_answers = open('Wrong Answers.txt', 'w')
+    wrong_answers.write('\nList Of Answers Wrong\n---------------------\n')
+    counter = 49
+    incorrect = 0
+
+    while counter != -1:
+        random_number_for_list = random.randint(0, counter)
+        chosen_list_number = all_numbers[random_number_for_list]
+        state = all_states[chosen_list_number]
+        user_inputted = str(input(f'What Is The Capital Of {state}?  -->  '))
+        user_inputted = user_inputted.upper()
+    # A loop so that all 50 states are gone through. The above code creates a random number, uses that to find the
+    # associated dictionary element. Asks the user what capital is and changes their input to all uppercase to avoid any
+    # false wrong answers
+
+        if user_inputted != all_capitals[state]:
+            print('Wrong Answer!!!')
+            wrong_answers.write(f'{state}:\t\t\t You Wrote: {user_inputted} \t\t\t The Capital Of {state} Is '
+                                f'{all_capitals[state]}\n')
+            incorrect += 1
+        # if they get it wrong it prints all data to the file
+
+        else:
+            print(f'Correct!!!')
+
+        all_numbers.remove(chosen_list_number)
+        counter -= 1
+        # removes number used from dictionary so that there won't be duplicates
+
+    wrong_answers.close()
+    # closes file
+
+    return incorrect
+    # returns the number of wrong answers
+
+
+if __name__ == '__main__':
+    main()
+# Calls in main
