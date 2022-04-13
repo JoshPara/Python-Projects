@@ -1,0 +1,221 @@
+# Joshua Paradie - Homework 8.5 - Names and Email Addresses - 04/12/2022
+# This is a directory style program. It will keep the associated name and email address in a key/value pair in a
+# dictionary. It will take the input from a tex file named 'directory' and save all entries in a dictionary. The user
+# will be given the option to look up, add, append, or delete data from the dictionary (directory). If any data is
+# added or changed or deleted, the program will update the text file to correlate
+
+def main():
+    exceptions()
+# Calls the exception function
+
+
+def exceptions():
+    try:
+        menu_redirect()
+
+    except IOError:
+        print('Error! No File Detected!')
+        selection = input('Would You Like To Create A Blank File To Be Used? Y/N')
+        selection = selection.upper()
+        if selection == 'Y':
+            print()
+        else:
+            print('No Valid File, A File By The Name (directory.txt) Must Be Created Before Program Can '
+                  'Run! ')
+            print('Exiting Program...')
+    # Prints error message for IOErrors, give the user a choice to create a blank file to be used
+
+    except ValueError:
+        print('Error! A Value Error has occurred!')
+    # Prints error message for ValueErrors
+
+    except Exception as err:
+        print(err)
+    # Prints an error message for other errors
+
+
+def menu_redirect():
+    user_selection = menu()
+    # Calls the function for the menu, saves the returned dictionary
+
+    if user_selection == 1:
+        look_up()
+    # If the user selects the first option, the look-up function is called
+
+    elif user_selection == 2:
+        add_new()
+    # If the user selects the second option, the add new entry function is called
+
+    elif user_selection == 3:
+        change_existing()
+    # If the user selects the third option, the change existing entry function is called
+
+    elif user_selection == 4:
+        delete_entry()
+    # If the user selects the forth option, the 'delete' entry function is called
+
+    else:
+        print('\nInvalid Selection!')
+        exceptions()
+    # If the user selects an invalid selection, the menu function is called again, repeating the options
+
+
+def menu():
+    print('\nNames and Email Addresses\n-------------------------')
+    print('1. Look Up Email Address')
+    print('2. Add New Name And Email Address')
+    print('3. Change An Existing Email Address')
+    print('4. Delete An Existing Name And Email Address')
+    selection = int(input('Selection: '))
+    return selection
+# Menu for users, user makes selection and that selection is returned
+
+
+def look_up():
+    email_directory = pull_from_file()
+    print('\nLook Up Email Address\n---------------------')
+    name = str(input('Enter The First Name: '))
+    name = name.upper()
+    # Enter the name to look-up, converted to uppercase
+
+    if name in email_directory:
+        print(f'Name: {name} ... Email Address: {email_directory.get(name)}')
+    else:
+        print(f'{name} Not Found In Directory')
+    # Search by name, enter name, change to uppercase, search directory, if there print, if not notify
+
+    repeat()
+
+
+def repeat():
+    selection = (input('\nWould You Like To Go Back To The Menu? Y/N: '))
+    selection = selection.upper()
+    # User enters if they want to go back to menu or not
+
+    if selection == 'Y':
+        exceptions()
+    # Send back to menu to loop
+
+    else:
+        print('Terminating Program...')
+        exit()
+    # If not repeating, program is terminated
+
+
+def add_new():
+    email_directory = pull_from_file()
+    # Calls the function to open the file
+
+    new_name = str(input('Enter The New First Name: '))
+    new_name = new_name.upper()
+    new_email = str(input(f'Enter The New Email For {new_name}: '))
+    new_email = new_email.upper()
+    email_directory[new_name] = new_email
+    print('Successfully Added!')
+    # User enters the new name and new email, it is saved in the dictionary
+
+    rewrite_to_file(email_directory)
+    # Calls the rewrite to file function and passes the dictionary, so that the new entries can be saved
+
+    repeat()
+    # Calls the repeat function
+
+
+def change_existing():
+    email_directory = pull_from_file()
+    # Calls the function to open the file
+
+    change_email_name = str(input('Enter The First Name Of The Person You Want To Change: '))
+    change_email_name = change_email_name.upper()
+    # User enters the persons name they want to change, name changed to uppercase
+
+    if change_email_name in email_directory:
+        email_directory.pop(change_email_name)
+        new_email = str(input(f'Enter The New Email Address For {change_email_name}: '))
+        new_email = new_email.upper()
+        email_directory[change_email_name] = new_email
+        print('Successfully Changed!')
+    # If name is found in dictionary, it removes the name from the dictionary, asks the user to enter the new email,
+    # changes it to uppercase and saves the name and new email in the dictionary
+
+    else:
+        print('Name Is Not In Directory!')
+    # If name is not found in directory, message is displayed
+
+    rewrite_to_file(email_directory)
+    # Calls the rewrite function and passes the dictionary
+
+    repeat()
+    # Calls the repeat function
+
+
+def delete_entry():
+    email_directory = pull_from_file()
+    # Calls the function to open the file
+
+    delete_input = str(input('Enter The First Name Of The Person You Want To Delete: '))
+    delete_input = delete_input.upper()
+    # User enters a name and then name they entered is converted to uppercase
+
+    if delete_input in email_directory:
+        email_directory.pop(delete_input)
+        print(f'{delete_input} Was Deleted From The Emailing Directory')
+    # If the user entered a name in the dictionary, the name will be removed from the dictionary
+
+    else:
+        print(f'{delete_input} Was Not Found In The Email Directory!')
+    # If the user inputted name is not in the dictionary, it will display this message
+
+    rewrite_to_file(email_directory)
+    # Calls rewrite to file function and passes the dictionary
+
+    repeat()
+    # Calls in the repeat function
+
+
+def pull_from_file():
+    infile = open('directory.txt', 'r')
+    contents = infile.readlines()
+    infile.close()
+    # Opens the file, reads it and closes file
+
+    collection = {}
+    temp_list = []
+    counter = 0
+    # Creates blank dictionary, blank list, and counter
+
+    for line in contents:
+        line = line.rstrip('\n')
+    # Goes line by line, removing the newline
+
+        for word in line.split():
+            word_upper = word.upper()
+            temp_list.append(word_upper)
+            counter += 1
+        # Goes through the 2 words on the line (name and email address) changes to uppercase and saves it in temp list
+
+        collection.update({temp_list[0]: temp_list[1]})
+        counter = 0
+        temp_list.clear()
+        # Saves the name and email address from the temp list to the dictionary, clears the counter and the temp list to
+        # loop
+
+    return collection
+    # Returns the collection dictionary
+
+
+def rewrite_to_file(user_data):
+    import os
+    temp_file = open('temp.txt', 'w')
+    for key, value in user_data.items():
+        line = f'{key} {value}'
+        temp_file.write(f'{line}\n')
+    temp_file.close()
+    os.remove('directory.txt')
+    os.rename('temp.txt', 'directory.txt')
+# Data is saved in temp file, directory file is deleted and temp file is renamed to directory
+
+
+if __name__ == '__main__':
+    main()
+# Calls main function

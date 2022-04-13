@@ -1,0 +1,82 @@
+# Joshua Paradie - Homework 8.4 - Word Frequency Program - 04/11/2022
+# This program will read the contents of a text file. The program will create a dictionary that will keep track of how
+# many times each word is displayed in the file. The program will then print the dictionary.
+# Will open a file named 'text.txt'
+
+def main():
+    exceptions()
+    # Calls in the exceptions function
+
+
+def exceptions():
+    try:
+        display_dictionary()
+    # Tries the display_dictionary function
+
+    except IOError:
+        print('Error! An IOError has occurred!')
+    # Checks for Input/Output Errors
+
+    except ValueError:
+        print('Error! A ValueError has occurred!')
+    # Checks for ValueErrors
+
+    except Exception as err:
+        print(err)
+    # Checks for other errors
+
+
+def read_file():
+    infile = open('text.txt')
+    file_contents = infile.readlines()
+    infile.close()
+    return file_contents
+    # Opens 'text.txt' file, reads it and returns the file
+
+
+def dictionary():
+    punctuations = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '-', '+', '=', '{', '}', '[', ']', '|', ':',
+                    ';', '"', '<', '>', ',', '.', '/', '?', '\n', ' ']
+    words_dictionary = {}
+    # Creating a punctuation list to remove punctuations from the file, creating a blank dictionary
+
+    file = read_file()
+    # Calling the function for reading the file
+
+    for line in file:
+        for x in range(30):
+            line = line.rstrip(punctuations[x])
+        # Strips any punctuation clumps from the line such as 'The dog is barking !!!'  without this code the below
+        # loops would save '!!!' as a dictionary input
+
+        for word in line.split():
+            word = word.upper()
+            for x in range(30):
+                word = word.rstrip(punctuations[x])
+    # Going Line by line and word by word, changing the word to uppercase, and stripping any punctuations
+
+            if word in words_dictionary:
+                value = words_dictionary.get(word)
+                value += 1
+                words_dictionary.update({f'{word}': value})
+            # If the word is found in the dictionary, the value is increased by 1
+
+            else:
+                words_dictionary.update({f'{word}': 1})
+            # If the word is not found in the dictionary, the word is added with a value of 1
+
+    return words_dictionary
+    # Returns the dictionary created
+
+
+def display_dictionary():
+    words_and_times = dictionary()
+    print('\nWord Frequency Program\n----------------------')
+    for key, value in words_and_times.items():
+        print(f'Word = {key} ... Frequency = {value}')
+    # Prints a title, prints the keys and values on different lines
+
+
+if __name__ == '__main__':
+    main()
+# Calls in the main function
