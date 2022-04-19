@@ -1,0 +1,57 @@
+# Joshua Paradie - Homework 9.4 - Largest List Item - 04/18/2022
+# This program will accept a list as an argument and use a recursive function to find the largest number in the list at
+# which point the largest number will then be returned
+
+def main():
+    exceptions()
+    # Calls the exceptions function
+
+
+def exceptions():
+    try:
+        user_input()
+    # Calls the user_input Function
+
+    except ValueError:
+        print('Error! A Value Error Has Occurred!')
+    # Checks for value errors
+
+    except Exception as err:
+        print(f'Error! A {err} Has Occurred!')
+    # Checks for other errors
+
+
+def user_input():
+    num_list = [5, 3, 10, 6, 234, 214, 211, 145, 65, 5001, 232, 5000, 4999, 4999]
+    largest = recursive_largest(num_list)
+    print('\nRecursive Largest List Item\n---------------------------')
+    print(f'The Largest Number In the List Is {largest}')
+    # A number list is created, the recursive function is called and the list is passed. The function called returns the
+    # largest item in the list in which is saved and printed
+
+
+def recursive_largest(num_list):
+    if len(num_list) != 1:
+        first = num_list[0]
+        second = num_list[1]
+    # Checks the list length, if there is more than one item in the list it takes the first and second list item
+
+        if first > second:
+            num_list.remove(second)
+            return recursive_largest(num_list)
+        # If the first item in the list is greater than the second, the second list item is deleted and calls the
+        # recursive function again, passing the new list
+
+        if first < second:
+            num_list.remove(first)
+            return recursive_largest(num_list)
+        # If the second item in the list is greater than the first, the first list item is deleted and then the
+        # recursive function is called again, passing the new list
+
+    return num_list[0]
+    # When there is only one list item remaining it means that item is the largest, it is then returned
+
+
+if __name__ == '__main__':
+    main()
+# Calls in the Main function

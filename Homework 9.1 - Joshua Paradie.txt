@@ -1,0 +1,50 @@
+# Joshua Paradie - Homework 9.1 - Recursive Printing - 04/17/2022
+# This is a program that has a recursive function which accepts an integer argument, n, and the numbers from 1 up
+# through n.
+
+def main():
+    exceptions()
+# Calls in the exceptions function
+
+
+def exceptions():
+    try:
+        user_input()
+    # Calls user input function
+
+    except ValueError:
+        print('Error! A Value Error Has Occurred!')
+    # Checks for Value Errors
+
+    except Exception as err:
+        print(f'Error! A {err} Occurred')
+    # Checks for other errors
+
+
+def user_input():
+    print('\nRecursive Printing\n------------------')
+    u_input = int(input('Enter A Whole Number: '))
+    if u_input < 1:
+        print('Invalid Number! Number Must Be Equal To Or Greater Than 1!')
+        exit()
+    # Accounts for numbers that may be invalid (user entered numbers less than 1)
+
+    starting_number = 1
+    recursive_printing(starting_number, u_input)
+    # Has user input a number, calls the recursive printing function and passes the lowest starting number (1) and the
+    # user inputted number
+
+
+def recursive_printing(lowest, n):
+    print(lowest)
+    if lowest != n:
+        lowest += 1
+        recursive_printing(lowest, n)
+# Recursive printing function, takes the lowest number (1) and the user inputted passed number (n). Prints the lowest
+# number, if the lowest number does not equal the user entered number, the lowest number is increased by 1 and the
+# recursive function is called again passing the user inputted number and the new lowest number.
+
+
+if __name__ == '__main__':
+    main()
+# Calls in the main function

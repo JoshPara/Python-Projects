@@ -1,0 +1,61 @@
+# Joshua Paradie - Homework 9.6 - Sum of Numbers - 04/18/2022
+# This Program will take an integer argument and return the sum of all the integers from 1 up till the number passed.
+# This will be done using a recursive function
+
+def main():
+    exceptions()
+    # Calls in the exceptions function
+
+
+def exceptions():
+    try:
+        user_input()
+    # Tries the user input function
+
+    except ValueError:
+        print('Error! A Value Error has Occurred!')
+    # Checks for value errors
+
+    except Exception as err:
+        print(f'Error! A {err} Has Occurred!')
+    # Checks for other errors
+
+
+def user_input():
+    repeat = 1
+    u_input = 0
+    while repeat == 1:
+        print('\nSum Of Numbers\n--------------')
+        u_input = int(input('Enter An Integer Number: '))
+        # Has the user enter a number
+
+        if u_input > 0:
+            repeat = 0
+        # If the number is valid the loop is exited
+
+        else:
+            print('Invalid Number! The Number Must Be Greater Than 0')
+        # If the number is invalid a message is displayed, and it is looped
+
+    total = 0
+    total_sum = recursive_number_sum(u_input, total)
+    print(f'\nThe Sum Of The Numbers From 1 to {u_input} is: {total_sum}')
+    # The number is passed to the recursive function to find the total, the total sum is
+    # then returned, saved and printed
+
+
+def recursive_number_sum(selected_number, total):
+    if selected_number != 0:
+        total = total + selected_number
+        selected_number -= 1
+        return recursive_number_sum(selected_number, total)
+    # If the number selected doesn't = 0 then the number is added to the total then decreased by 1, the recursive
+    # function is called again, passing the new total and the new decreased selected number
+
+    return total
+    # When the selected number reaches 0, the final total is returned
+
+
+if __name__ == '__main__':
+    main()
+# Calls in the main function

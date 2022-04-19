@@ -1,0 +1,52 @@
+# Joshua Paradie - Homework 9.3 - Recursive Lines - 04/18/2022
+# This program will take an integer argument, n, and will display (n) lines of asterisks, increasing each
+# time, the final line will have (n) number of asterisks
+
+def main():
+    exceptions()
+# Calls in the exceptions function
+
+
+def exceptions():
+    try:
+        user_input()
+    # Tries the User_input function
+
+    except ValueError:
+        print('Error! A Value Error Has Occurred!')
+    # Checks for Value Error exceptions
+
+    except Exception as err:
+        print(f'Error! A {err} Has Occurred!')
+    # Checks for other exceptions
+
+
+def user_input():
+    counter = 1
+    n = int(input('Enter A Number: '))
+    # Creates a counter and has the user enter a number
+
+    if n > 0:
+        print('\nRecursive Lines\n---------------')
+        recursive_lines(n, counter)
+    # If the number entered is greater than 0 then the number is passed to the recursive lines function along with the
+    # counter
+
+    else:
+        print('Error! Invalid Number!')
+    # If the number entered is less than 0 an error message will display
+
+
+def recursive_lines(n, counter):
+    print('*' * counter)
+    counter += 1
+    # Printing an asterisk (the amount increases by 1 every time called) and increasing the counter by 1
+
+    if counter != n + 1:
+        recursive_lines(n, counter)
+    # keeps track on how many times to call the function again
+
+
+if __name__ == '__main__':
+    main()
+# Calls in main function

@@ -1,0 +1,59 @@
+# Joshua Paradie - Homework 9.2 - Recursive Multiplication - 4/18/2022
+# This program will accept 2 arguments, x & y, and pass it to a recursive function that will multiply them together and
+# find the sum
+
+def main():
+    exceptions()
+# Calls in the exceptions function
+
+
+def exceptions():
+    try:
+        user_input()
+    # Tries User Input function
+
+    except ValueError:
+        print('Error! A Value Error Has Occurred!')
+    # Checks for Value Errors
+
+    except Exception as err:
+        print(f'Error! A {err} Has Occurred!')
+    # Checks for other errors
+
+
+def user_input():
+    u_input = 1
+    total = 0
+    while u_input == 1:
+        x_input = int(input('\nEnter The First Value: '))
+        y_input = int(input('Enter The Second Value: '))
+    # User inputs two values
+
+        if (x_input > 0) and (y_input > 0):
+            recursive_multiplication(x_input, y_input, total)
+            exit()
+        # If the 2 values are valid, two values and total value holder is passed to the recursive_multiplication
+        # function
+
+        else:
+            print('Error Input Is Invalid! The Numbers Must Be Greater Than 0')
+        # If the values are not valid, an error message is displayed and the while loop is looped again
+
+
+def recursive_multiplication(x, y, total_value):
+    if y != 0:
+        total_value = total_value + x
+        y -= 1
+        recursive_multiplication(x, y, total_value)
+    # Recursive loop, adds the value of x to the total, decreases y value and calls the function again, does so until
+    # the y value reaches 0
+
+    else:
+        print('\nRecursive Multiplication\n------------------------')
+        print(f'The Sum Is: {total_value}')
+    # if the y value reaches 0 then the sum is printed
+
+
+if __name__ == '__main__':
+    main()
+# Calls in the main function

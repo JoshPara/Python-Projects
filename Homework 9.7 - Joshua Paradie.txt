@@ -1,0 +1,65 @@
+# Joshua Paradie - Homework 9.7 - Recursion Power Method - 04/18/2022
+# This program will use a recursion function to raise a number to a power. The recursion function accepts two arguments,
+# a number to be raised and the exponent. It is being assumed that the exponent is not a negative integer
+
+def main():
+    exceptions()
+    # Calls in the exceptions function
+
+
+def exceptions():
+    try:
+        user_input()
+    # Tries the user input function
+
+    except ValueError:
+        print('Error! A Value Error has Occurred!')
+    # Checks for value errors
+
+    except Exception as err:
+        print(f'Error! A {err} Has Occurred!')
+    # Checks for other errors
+
+
+def user_input():
+    repeat = 1
+    num_to_be_raised = 0
+    exponent = 0
+    while repeat == 1:
+        print('\nRecursion Power Method\n----------------------')
+        num_to_be_raised = int(input('Enter The Number To Be Raised: '))
+        exponent = int(input(f'Enter The Exponent of {num_to_be_raised}: '))
+    # User enters the two values they want for the number to be raised and the exponents
+
+        if (num_to_be_raised > 0) and (exponent > 0):
+            repeat = 0
+        # If the numbers are valid the loop is exited
+
+        else:
+            print('\nInvalid Number! The Numbers Must Be Greater Than 0 And They Both Must Be Integers! ')
+        # If the numbers are invalid a message is displayed, and it is looped
+
+    total = 1
+    total_number = recursive_power_method(num_to_be_raised, exponent, total)
+    print(f'\nThe Total Of {num_to_be_raised} To The {exponent} Power is: {total_number}')
+    # A total is created as 1 since it will be used in multiplication of itself, the recursion function is called, both
+    # the numbers are passed along with the total, the total of the numbers is returned from the recursive function, and
+    # it is printed
+
+
+def recursive_power_method(number_raised, exponent, total):
+    if exponent != 0:
+        total = total * number_raised
+        exponent -= 1
+        return recursive_power_method(number_raised, exponent, total)
+    # If the exponent isn't 0 then this code runs, the total is multiplied by the number being raised and added to the
+    # total. The exponent is decreased by 1 and the recursive function is recalled and the number raised, along with the
+    # new exponent and the new total are passed
+
+    return total
+    # When the exponent reaches 0 that means it is complete and the final total is returned
+
+
+if __name__ == '__main__':
+    main()
+# Calls in the main function

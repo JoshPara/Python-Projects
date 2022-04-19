@@ -1,0 +1,67 @@
+# Joshua Paradie - Homework 9.5 - Recursive List Sum - 04/18/2022
+# This Program has a recursive function that accepts a list of numbers. The function then recursively calculates the sum
+# of all numbers in the list and returns the value
+
+def main():
+    exceptions()
+    # Calls in the exceptions function
+
+
+def exceptions():
+    try:
+        user_input()
+    # Calls in the function for user input and tries that
+
+    except ValueError:
+        print('Error! A Value Error Has Occurred!')
+    # Checks for Value Errors
+
+    except Exception as err:
+        print(f'Error! A {err} Has Occurred!')
+    # Checks for other errors
+
+
+def user_input():
+    repeat = 'Y'
+    num_list = []
+    counter = 1
+    print()
+    # Creates an empty list, a counter, and a variable for the loop
+
+    while repeat == 'Y':
+        temp = float(input(f'Enter Number {counter}: '))
+        num_list.append(temp)
+        counter += 1
+    # Has the user enter the first list item, it is added to the list and the counter is increased
+
+        repeat = input('Would You Like To Enter Another Number? Y/N: ')
+        repeat = repeat.upper()
+        # Checks if they want to loop again, changes to uppercase to support 'y' instead of 'Y'
+
+    total = 0
+    sum_of_list = recursive_list_sum(num_list, total)
+    print('\nRecursive List Sum\n------------------')
+    print(f'The Sum Of The User Created List Is: {sum_of_list}')
+    # Calls the recursive function and passes the number list once the user is done entering numbers to the list. It
+    # saves the returned value of the sum and prints it
+
+
+def recursive_list_sum(num_list, total):
+    length_of_list = len(num_list)
+    # Finds the length of the list
+
+    if length_of_list != 0:
+        temp = num_list[0]
+        total = total + temp
+        num_list.remove(temp)
+        return recursive_list_sum(num_list, total)
+    # If there is something left in the list then the first list item is added to the total then removed, the recursive
+    # function is then called again, passing the new list and the new total
+
+    return total
+    # When the list is empty, the total is returned
+
+
+if __name__ == '__main__':
+    main()
+# Calls in the main function
