@@ -1,0 +1,74 @@
+# Joshua Paradie - Homework 11.1 - Employee and Production Worker Classes - 5/04/2022
+# This is a program that will contain employees (class) and production workers (subclass). This program will create an
+# object for the production worker class and have the user enter data for each data attribute, store the date and then
+# print it
+
+
+def main():
+    exceptions()
+# Calls in the exceptions function
+
+
+def exceptions():
+    try:
+        add_entry()
+    # Tries the function
+
+    except ValueError:
+        print('Error! A Value Error Has Occurred')
+    # Prints an error message incase a value error occurs
+
+    except Exception as err:
+        print(err)
+    # Prints an error message incase a different error occurs
+
+
+def add_entry():
+    print('\nEmployee Data\n-------------')
+    name = str(input('Enter The Employee Name: '))
+    name = name.upper()
+    number = int(input('Enter The Employee Number: '))
+    shift_number = int(input('Enter The Employee Shift Number: '))
+    hourly_pay_rate = float(input('Enter The Employee Pay Rate: '))
+    # Allows for user input
+
+    my_employee = ProductionWorker(shift_number, hourly_pay_rate, name, number)
+    # Creates an object in the class and passes the variables
+
+    my_employee.print_data()
+    # Calls the print function for the class
+
+
+class EmployeeClass(object):
+    def __init__(self, name, number):
+        print('\n-------------')
+        print(f'Employee Name: {name}')
+        print(f'Employee Number: {number}')
+    # Employee class, holds name and number of the employee
+
+
+class ProductionWorker(EmployeeClass):
+    def __init__(self, shift_number, hourly_pay_rate, name, number):
+        self.__name = name
+        self.__number = number
+        self.__shift_number = shift_number
+        self.__hourly_pay_rate = hourly_pay_rate
+        super().__init__(name, number)
+    # Defines init with parameters, super class for the employee is also here
+
+    def print_data(self):
+        if self.__shift_number == 1:
+            print('Shift Number: Day Shift')
+        elif self.__shift_number == 2:
+            print('Shift Number: Night Shift')
+        else:
+            print('Error Invalid Shift')
+        # Accounts for the user input of shift number
+
+        print(f'Hourly Pay Rate: ${self.__hourly_pay_rate}')
+        # Prints the pay rate
+
+
+if __name__ == '__main__':
+    main()
+# Calls in main

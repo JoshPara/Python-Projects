@@ -1,0 +1,147 @@
+# Joshua Paradie - Homework 10.3 - Trivia Game - 5/03/2022
+# This program will create a 2-person trivia game where the person will be given a question along with 4 answers, they
+# must figure out which answer is correct
+
+
+def main():
+    exceptions()
+# Calls in the exceptions function
+
+
+def exceptions():
+    try:
+        start_game()
+
+    except ValueError:
+        print('Error! A Value Error Has Occurred')
+    # Prints an error message incase a value error occurs
+    except Exception as err:
+        print(err)
+    # Prints an error message incase a different error occurs
+
+
+def start_game():
+    print('\nTrivia Game\n-----------')
+    start = input('Press Enter To Start Game: ')
+    counter = 5
+    number_correct = 0
+
+    numbers_list, trivia_question_list, correct_answer_list, random_answer_list = lists()
+    print('\nPlayer 1')
+    numbers_list, player_1_number_correct = player(counter, numbers_list, trivia_question_list, correct_answer_list,
+                                                   random_answer_list, number_correct)
+    # For the first player, the function is called to call the questions, lists are returned from the list function
+
+    print('\nPlayer 2')
+    numbers_list, player_2_number_correct = player(counter, numbers_list, trivia_question_list, correct_answer_list,
+                                                   random_answer_list, number_correct)
+    # For the second player, the function is called to call the questions
+
+    print(f'\nPlayer 1 Score: {player_1_number_correct}/5')
+    print(f'Player 2 Score: {player_2_number_correct}/5')
+    # Prints player scores
+
+
+def player(counter, numbers_list, trivia_question_list, correct_answer_list, random_answer_list, number_correct):
+    import random
+    if counter >= 0:
+        print(f'\nQuestion:\n---------')
+        temp_question_number = random.randint(0, counter - 1)
+        question_number = numbers_list[temp_question_number]
+        numbers_list.remove(question_number)
+        # Removes the question number from the numbers list, so it can't be asked again
+
+        random_list = [0, 1, 2]
+        random_counter = 2
+    # Generates a random question number to be pulled from the list, creates a list and a counter
+
+        temp = random.randint(0, random_counter)
+        random_number1 = random_list[temp]
+        random_list.remove(random_number1)
+        random_counter -= 1
+    # Use the random list to choose a random number to pull from the random answer list
+
+        temp = random.randint(0, random_counter)
+        random_number2 = random_list[temp]
+        random_list.remove(random_number2)
+        random_counter -= 1
+    # Use the random list to choose a random number to pull from the random answer list
+
+        temp = random.randint(0, random_counter)
+        random_number3 = random_list[temp]
+        random_list.remove(random_number3)
+        random_counter -= 1
+    # Use the random list to choose a random number to pull from the random answer list
+
+        question_object = Question(trivia_question_list[question_number], random_answer_list[random_number1],
+                                   random_answer_list[random_number2], random_answer_list[random_number3],
+                                   correct_answer_list[question_number], number_correct)
+    # Creates an object in the questions list, passes the random trivia question, 3 random answers, 1 correct answer
+    # and the number the player has correct
+
+        question_object.print_question_and_answers()
+        answer = input('\nEnter Your Answer: ')
+        answer = answer.upper()
+        # Allows for user input of the correct answer and makes it uppercase
+
+        correct_answer = correct_answer_list[question_number]
+        # The correct answer is retrieved
+
+        if answer == correct_answer:
+            print('\nCorrect!')
+            number_correct += 1
+            question_object.increase_score(number_correct)
+            number_correct = question_object.get_score()
+        # If the user answer is the same as the correct answer, a correct message is printed and the score is increased
+        # by 1
+
+        if counter > 1:
+            player(counter - 1, numbers_list, trivia_question_list, correct_answer_list, random_answer_list,
+                   number_correct)
+        # Recursive function to call itself
+
+    return numbers_list, number_correct
+
+
+def lists():
+    numbers_list = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    trivia_question_list = ['What Is The Color Of The Sky?', 'What Is The Color Of The Grass?',
+                            'What Is The Color Of The Ocean?', 'What Is The Color Of A Pumpkin?',
+                            'What Is The Color Of A Banana?', 'What Is The Color Of A The Sky?',
+                            'What Is The Color Of The Sun?', 'What Is The Color Of A Panther?',
+                            'What Is The Color Of An Avocado?', 'What Is My Favorite Color?']
+    correct_answer_list = ['BLUE', 'GREEN', 'BLUE', 'ORANGE', 'YELLOW', 'CLEAR', 'YELLOW', 'BLACK', 'GREEN', 'BLUE']
+    random_answer_list = ['RED', 'PURPLE', 'PINK']
+    return numbers_list, trivia_question_list, correct_answer_list, random_answer_list
+
+
+class Question:
+    def __init__(self, trivia_question, answer1, answer2, answer3, answer4, number_correct):
+        self.__trivia_question = trivia_question
+        self.__answer1 = answer1
+        self.__answer2 = answer2
+        self.__answer3 = answer3
+        self.__answer4 = answer4
+        self.__number_correct = number_correct
+    # Defines init with parameters
+
+    def print_question_and_answers(self):
+        print(self.__trivia_question)
+        print(self.__answer1)
+        print(self.__answer2)
+        print(self.__answer3)
+        print(self.__answer4)
+    # Class function to print the trivia questions and list answers
+
+    def increase_score(self, number_correct):
+        self.__number_correct = number_correct
+    # Class function to increase the score
+
+    def get_score(self):
+        return self.__number_correct
+    # Class function to return the number of correct answers
+
+
+if __name__ == '__main__':
+    main()
+# Calls in main

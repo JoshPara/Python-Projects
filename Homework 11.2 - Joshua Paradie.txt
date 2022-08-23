@@ -1,0 +1,125 @@
+# Joshua Paradie - Homework 11.2 - Shift Supervisor Class - 5/04/2022
+# This is a program that will contain employees (class) and production workers (subclass) from 11.1. This program will
+# allow for the shift supervisor to enter their data into a shift supervisor subclass of the employee class. Keeping the
+# employee class attributes and adding annual salary and annual production bonus to the subclass
+
+
+def main():
+    exceptions()
+# Calls in the exceptions function
+
+
+def exceptions():
+    try:
+        add_entry()
+    # Tries the function
+
+    except ValueError:
+        print('Error! A Value Error Has Occurred')
+    # Prints an error message incase a value error occurs
+
+    except Exception as err:
+        print(err)
+    # Prints an error message incase a different error occurs
+
+
+def add_entry():
+    print('\nEmployee Data\n-------------')
+    name = str(input('Enter The Employee Name: '))
+    name = name.upper()
+    number = int(input('Enter The Employee Number: '))
+    # Data entry fields for the employee class
+
+    selection = str(input('Are You A Production Worker? Y/N: '))
+    selection = selection.upper()
+    # Asks if they are a production worker
+
+    if selection == 'Y':
+        shift_number = int(input('Enter The Employee Shift Number: '))
+        hourly_pay_rate = float(input('Enter The Employee Pay Rate: '))
+        # Allows for user input
+
+        print('\nProduction Worker Data\n----------------------')
+
+        my_employee_data = ProductionWorker(shift_number, hourly_pay_rate, name, number)
+        # Creates an object in the class and passes the variables
+
+        my_employee_data.print_data()
+        # Calls the print function for the class
+
+        exit()
+        # Exits the program
+
+    selection = str(input('Are You A Shift Supervisor? Y/N: '))
+    selection = selection.upper()
+    # If they are not a production worker, asks if they are a shift supervisor
+
+    if selection == 'Y':
+
+        annual_salary = float(input('Enter The Shift Supervisor Annual Salary: '))
+        annual_production_bonus = float(input('Enter The Shift Supervisor Annual Production Bonus: '))
+
+        print('\nShift Supervisor Data\n---------------------')
+
+        my_shift_supervisor_data = ShiftSupervisor(annual_salary, annual_production_bonus, name, number)
+        # Creates an object in the class and passes the variables
+
+        my_shift_supervisor_data.print_data()
+        # Calls the print function for the class
+
+        exit()
+
+    else:
+        print('You Do Not Work Here Then!')
+    # If neither production worker nor a shift supervisor then error message displayed
+
+
+class EmployeeClass(object):
+    def __init__(self, name, number):
+        print(f'Employee Name: {name}')
+        print(f'Employee Number: {number}')
+    # Employee class, holds name and number of the employee
+
+
+class ProductionWorker(EmployeeClass):
+    def __init__(self, shift_number, hourly_pay_rate, name, number):
+        self.__name = name
+        self.__number = number
+        self.__shift_number = shift_number
+        self.__hourly_pay_rate = hourly_pay_rate
+        super().__init__(name, number)
+    # Defines init with parameters, super class for the employee is also here
+
+    def print_data(self):
+        if self.__shift_number == 1:
+            print('Shift Number: Day Shift')
+        elif self.__shift_number == 2:
+            print('Shift Number: Night Shift')
+        else:
+            print('Error Invalid Shift')
+        # Accounts for the user input of shift number
+
+        print(f'Hourly Pay Rate: ${self.__hourly_pay_rate}')
+        # Prints the pay rate
+
+
+class ShiftSupervisor(EmployeeClass):
+    def __init__(self, annual_salary, annual_production_bonus, name, number):
+        self.__name = name
+        self.__number = number
+        self.__annual_production_bonus = annual_production_bonus
+        self.__annual_salary = annual_salary
+        super().__init__(name, number)
+    # Defines init with parameters, super class for the employee is also here
+
+    def print_data(self):
+        print(f'Annual Salary: ${self.__annual_salary}')
+        # Prints the annual salary
+
+        print(f'Annual Production Bonus: ${self.__annual_production_bonus}')
+        # Prints the annual production bonus
+
+
+if __name__ == '__main__':
+    main()
+# Calls in main

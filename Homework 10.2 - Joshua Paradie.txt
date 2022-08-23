@@ -1,0 +1,111 @@
+# Joshua Paradie - Homework 10.2 - Car Class - 5/03/2022
+# This program will have the user enter the make and model of the car. The speed will start at 0mph and then get
+# recursively called to increase the speed by 5mph five times, at which point the speed will be decreased by 5mph five
+# times
+
+
+def main():
+    exceptions()
+# Calls in the exceptions function
+
+
+def exceptions():
+    try:
+        user_input()
+
+    except ValueError:
+        print('Error! A Value Error Has Occurred')
+    # Prints an error message incase a value error occurs
+
+    except Exception as err:
+        print(err)
+    # Prints an error message incase a different error occurs
+
+
+def user_input():
+    print('\nCar Class\n---------')
+    model_year = str(input('Enter The Model Year: '))
+    make = str(input('Enter The Make Of The Car: '))
+    speed = 0
+    # User inputs variables
+
+    my_car = Car(model_year, make, speed)
+    # Creating an object in car class
+
+    my_car.set_year_model(model_year)
+    my_car.set_make(make)
+    my_car.set_speed(speed)
+    # Setting the model year, make, and speed
+
+    counter = 5
+    print('Car Accelerating...')
+    accelerate_recursive_calling(my_car, counter)
+    print('Car Braking...')
+    brake_recursive_calling(my_car, counter)
+    # Calling the acceleration recursive function, passing the class object and the counter. Then calling the brake
+    # recursive function, passing the class object and counter
+
+
+def accelerate_recursive_calling(my_car, counter):
+    if counter != 0:
+        speed = my_car.get_speed()
+        my_car.accelerate(speed)
+        print(my_car.get_speed())
+        accelerate_recursive_calling(my_car, counter - 1)
+    # If the counter is not at 0, get the speed, call the accelerate function, get and print the new speed. Then
+    # recursively call the function again, decreasing the counter
+
+    else:
+        return
+    # Return when done
+
+
+def brake_recursive_calling(my_car, counter):
+    if counter != 0:
+        speed = my_car.get_speed()
+        my_car.brake(speed)
+        print(my_car.get_speed())
+        brake_recursive_calling(my_car, counter - 1)
+    # If the counter is not at 0, get the speed, call the brake function, get and print the new speed. Then
+    # recursively call the function again, decreasing the counter
+
+    else:
+        return
+    # Return when done
+
+
+class Car:
+    def __init__(self, year_model, make, speed):
+        self.__year_model = year_model
+        self.__make = make
+        self.__speed = speed
+    # Defines init with parameters
+
+    def set_year_model(self, year_model):
+        self.__year_model = year_model
+
+    def set_make(self, make):
+        self.__make = make
+
+    def set_speed(self, speed):
+        self.__speed = speed
+# Setting year model, make, and speed
+
+    def accelerate(self, speed):
+        speed += 5
+        self.__speed = speed
+# Increase speed by 5 mph
+
+    def brake(self, speed):
+        speed -= 5
+        self.__speed = speed
+# Decrease speed by 5mph
+
+    def get_speed(self):
+        return self.__speed
+# Getting the speed
+
+
+if __name__ == '__main__':
+    main()
+# Calls in main

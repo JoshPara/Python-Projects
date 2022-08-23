@@ -1,0 +1,82 @@
+# Joshua Paradie - Homework 11.3 - Person and Customer Classes - 5/04/2022
+# This is a program that will contain a class for the person with the following attributes: name, address, phone number.
+# This program will also contain a subclass of the person class with the following attributes: whether they wish to be
+# on a mailing list and their customer number
+
+
+def main():
+    exceptions()
+# Calls in the exceptions function
+
+
+def exceptions():
+    try:
+        add_entry()
+    # Tries the function
+
+    except ValueError:
+        print('Error! A Value Error Has Occurred')
+    # Prints an error message incase a value error occurs
+
+    except Exception as err:
+        print(err)
+    # Prints an error message incase a different error occurs
+
+
+def add_entry():
+    print('\nCustomer Data\n-------------')
+    name = str(input('Enter The Customers Name: '))
+    name = name.upper()
+    address = str(input(f'Enter {name} Address: '))
+    address = address.upper()
+    phone_number = int(input(f'Enter {name} Phone Number Containing No Characters Or Spaces: '))
+    # Allows for user input to be used in Person class
+
+    customer_number = int(input(f'Enter {name} Customer Number: '))
+    mailing_list = str(input(f'Does {name} Wish To Be On The Mailing List? Y/N: '))
+    mailing_list = mailing_list.upper()
+    # Allows for user input to be used in the Customer Subclass of the Person Class
+
+    my_customer = Customer(name, address, phone_number, customer_number, mailing_list)
+    # Creates an object in the class and passes the variables
+
+    my_customer.print_data()
+    # Calls the print function for the class
+
+
+class Person(object):
+    def __init__(self, name, address, phone_number):
+        print('\nCustomer Data\n-------------')
+        print(f'Customer Name: {name}')
+        print(f'Customer Address: {address}')
+        print(f'Customer Phone Number: {phone_number}')
+    # Person class, holds name, address and phone number of the customer
+
+
+class Customer(Person):
+    def __init__(self, name, address, phone_number, customer_number, mailing_list):
+        self.__name = name
+        self.__address = address
+        self.__phone_number = phone_number
+        self.__customer_number = customer_number
+        self.__mailing_list = mailing_list
+        super().__init__(name, address, phone_number)
+    # Defines init with parameters, super class for the person class is also here
+
+    def print_data(self):
+        print(f'Customer Number: {self.__customer_number}')
+        # Prints customer number
+
+        if self.__mailing_list == 'Y':
+            print('The Customer Will Be Added To Our Mailing List!')
+        elif self.__mailing_list == 'N':
+            print('The Customer Will NOT Be Added To Our Mailing List!')
+        else:
+            print('Error Invalid Mailing List Selection, We Will Just Assume They Want To Be On Our Awesome Mailing '
+                  'List!')
+        # Accounts for the user input of if they want to be on the mailing list or not
+
+
+if __name__ == '__main__':
+    main()
+# Calls in main

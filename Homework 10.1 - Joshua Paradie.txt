@@ -1,0 +1,84 @@
+# Joshua Paradie - Homework 10.1 - Pet Class - 5/3/2022
+# This is a program in which a class named pets will be created, with the attributes of name, animal type, and age.
+# There will be the following methods as well, set name, set animal type, set age, get name, get animal type, and get
+# age. The program will have the user enter the name, animal type and age and the program will store it and print it
+
+def main():
+    exceptions()
+# Calls in the exceptions function
+
+
+def exceptions():
+    try:
+        add_entry()
+    # Tries the add entry function
+
+    except ValueError:
+        print('Error! A Value Error Has Occurred')
+    # Prints an error message incase a value error occurs
+
+    except Exception as err:
+        print(err)
+    # Prints an error message incase a different error occurs
+
+
+def add_entry():
+    print('\nPet Class\n---------')
+    name = str(input('Enter The Animals Name: '))
+    name = name.upper()
+    animal_type = str(input('Enter The Animal Type: '))
+    animal_type = animal_type.upper()
+    age = float(input('Enter the Animals Age: '))
+    # User enters their pets name, type, and age
+
+    my_pet = Pet(name, animal_type, age)
+    # Creates an object in the pets class
+
+    my_pet.set_name(name)
+    my_pet.set_animal_type(animal_type)
+    my_pet.set_age(age)
+    # Sets the name, animal type and age in the object in the class
+
+    print_class(my_pet)
+    # Calls the print function for the class
+
+
+def print_class(my_pet):
+    print()
+    print(f'Pets Name: {my_pet.get_name()}')
+    print(f'Pet Type: {my_pet.get_animal_type()}')
+    print(f'Pet Age: {my_pet.get_age()}')
+    # Prints out the pets name, type, and age
+
+
+class Pet:
+    def __init__(self, name, animal_type, age):
+        self.__name = name
+        self.__animal_type = animal_type
+        self.__age = age
+    # Defines init with parameters
+
+    def set_name(self, name):
+        self.__name = name
+
+    def set_animal_type(self, animal_type):
+        self.__animal_type = animal_type
+
+    def set_age(self, age):
+        self.__age = age
+# Setting name, animal type, and age
+
+    def get_name(self):
+        return self.__name
+
+    def get_animal_type(self):
+        return self.__animal_type
+
+    def get_age(self):
+        return self.__age
+# Getting the animals name, type and age
+
+
+if __name__ == '__main__':
+    main()
+# Calls in main
