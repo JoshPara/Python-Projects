@@ -1,0 +1,841 @@
+# Joshua Paradie - Final Project - 04/19/2022
+# This program is the final project for Python Class. This program is designed to take a file full of numbers and
+# present the user with several options, all presenting on a GUI.
+
+from tkinter import *
+
+
+def main():
+    exceptions()
+    # Tries the exceptions function
+
+
+def exceptions():
+    try:
+        data = []
+        file_name_entry = ''
+        menu(data, file_name_entry)
+    # Calls in the menu function, creates an empty list and empty variable to pass
+
+    except ValueError:
+        print('Error! A Value Error Has Occurred!')
+    # Checks for value errors
+
+    except IOError:
+        print('Error! A IO Error Has Occurred!')
+    # Checks for IO errors
+
+    except IndexError:
+        print('Error An Index Error Has Occurred!')
+    # Checks for Index Errors
+
+    except Exception as err:
+        print(f'Error! An {err} Has Occurred!')
+    # Checks for other errors
+
+
+def menu(data_list, file_name_entry):
+    import tkinter as tk
+    menu_window = tk.Tk()
+    label = tk.Label(text='UNH Scripting w/Python\n\n')
+    # Imports library, creates menu window with a label
+
+    current_file_label = tk.Label(text=f'Current Data File:')
+    # Prints a label on the window for what the current data file being worked on is
+
+    if file_name_entry != '':
+        file_label = tk.Label(text=f'{file_name_entry}.txt\n')
+    # If the file name isn't empty then it prints the file name being used
+
+    else:
+        file_label = tk.Label(text='NONE\n')
+    # If the file name is not specified or empty, it prints none
+
+    sel1 = tk.Button(menu_window, text="1. Select File", command=lambda: select_file_gui(data_list, menu_window,
+                                                                                         file_name_entry))
+    # Select/Create Data File
+
+    sel2 = tk.Button(menu_window, text="2. Display All", command=lambda: display_all(data_list, menu_window,
+                                                                                     file_name_entry))
+    # Display All The Numbers In The Data File, Along With Their Total And Average
+
+    sel3 = tk.Button(menu_window, text="3. Smallest -> Largest", command=lambda: largest(data_list, menu_window,
+                                                                                         file_name_entry))
+    # Display All The Numbers In The Data File Sorted From Smallest To Largest
+
+    sel4 = tk.Button(menu_window, text="4. Search/Occurs", command=lambda: search_gui(data_list, menu_window,
+                                                                                      file_name_entry))
+    # Search For A Number In The Data File And Display How Many Times The Number Occurs In The File
+
+    sel5 = tk.Button(menu_window, text="5. Largest Number", command=lambda: largest_number(data_list, menu_window,
+                                                                                           file_name_entry))
+    # Display The Largest Number In The Data File
+
+    sel6 = tk.Button(menu_window, text="6. Append Number", command=lambda: append_gui(data_list, menu_window,
+                                                                                      file_name_entry))
+    # Append One Or More Random Numbers To The Data File
+
+    sel7 = tk.Button(menu_window, text="7. Encrypt", command=lambda: encrypt_gui(data_list, menu_window,
+                                                                                 file_name_entry))
+    # Encrypt The Selected File
+
+    sel8 = tk.Button(menu_window, text="8. Decrypt", command=lambda: decrypt_gui(data_list, menu_window,
+                                                                                 file_name_entry))
+    # Decrypt The Selected File
+
+    sel9 = tk.Button(menu_window, text="9. Exit", command=exit_program)
+    # Exit The Program
+
+    label.pack()
+    current_file_label.pack()
+    file_label.pack()
+    sel1.pack()
+    sel2.pack()
+    sel3.pack()
+    sel4.pack()
+    sel5.pack()
+    sel6.pack()
+    sel7.pack()
+    sel8.pack()
+    sel9.pack()
+    menu_window.mainloop()
+    return data_list
+    # Packs everything into the window, returns data list
+
+
+def select_file_gui(numbers_list, menu_window, file_name_entry):
+    import tkinter as tk
+    menu_window.destroy()
+    select_file_window = tk.Tk()
+    file_selection_label = tk.Label(select_file_window, text='\nFile Selection\n\nEnter The Filename Preceding The '
+                                                             '.txt Extension:')
+    # Destroys menu window, creates a new window
+
+    entry = tk.Entry(select_file_window)
+    enter_button = tk.Button(select_file_window, text='Enter', command=lambda: select_file(select_file_window, entry))
+    file_selection_label.pack()
+    entry.pack()
+    enter_button.pack()
+    menu_button = tk.Button(text='Menu', command=lambda: close_window_to_menu(select_file_window, numbers_list,
+                                                                              file_name_entry))
+    menu_button.pack()
+    select_file_window.mainloop()
+    # Creates a new window, adds an entry field, adds an 'enter' and a 'menu' button as well
+
+
+def select_file(select_file_window, file_name_entry):
+    import tkinter as tk
+    import os.path
+
+    file_selection = file_name_entry.get()
+    # Gets the file name entry
+
+    if (file_selection == '') or (file_selection == ' '):
+        error_prompt = tk.Label(select_file_window, text='\nError! Invalid Entry!')
+        error_prompt.pack()
+        select_file_window.mainloop()
+    # If the entry isn't valid, such as not entering a file name and selecting enter instead, an error message will
+    # print
+
+    select_file_window.destroy()
+    # Destroys the window
+
+    numbers_list = []
+    # Creates blank list
+
+    if os.path.isfile(f'{file_selection}.txt'):
+        # Checks to see if the file exists
+
+        opened_file = open(f'{file_selection}.txt', 'r')
+        file_data = opened_file.readlines()
+        opened_file.close()
+        # File they entered is opened for reading, if not found it is created (at the bottom of this function), lines
+        # are read from the file and the file's closed
+
+        test_line = file_data[0][0]
+        # Checks to see what the first character or the first item in the list
+
+        if test_line.isnumeric():
+            # If the first character is a number then the data isn't encrypted
+
+            for line in file_data:
+                for word in line.split(' '):
+                    word = word.rstrip('\n')
+                    number = float(word)
+                    numbers_list.append(number)
+            # Goes line by line separating the numbers, it then strips all new lines, and adds each number to the list
+
+            menu(numbers_list, file_selection)
+        # Success Message and Returns the list
+        # Should call GUI Menu and Pass the new list
+
+        else:
+            encrypted_string = convert_encrypted_file_to_string(file_data)
+            menu(encrypted_string, file_selection)
+            # For encrypted file, calls the function to convert the encrypted file to a string, and then calls the menu
+            # function, passing the encrypted string and the file selection
+
+    else:
+        opened_file = open(f'{file_selection}.txt', 'w')
+        opened_file.close()
+        menu(numbers_list, file_selection)
+    # If the file does not exist, the file is created
+
+
+def convert_encrypted_file_to_string(file_data):
+    encrypted_string = ''
+    # Creates empty variable to be used to store the string of encrypted data
+
+    for line in file_data:
+        for word in line.split(' '):
+            word = word.rstrip('\n')
+            encrypted_string = encrypted_string + word
+    # Strips the encrypted data and stores it as one string
+
+    return encrypted_string
+    # Returned the string of encrypted data
+
+
+def check_if_data_encrypted(numbers_list):
+    if type(numbers_list) == str:
+        return 1
+
+
+# Check function to see if Data Is Encrypted, if so bring back to menu
+
+
+def display_all(numbers_list, menu_window, file_name_entry):
+    import tkinter as tk
+    menu_window.destroy()
+    # Destroys menu window
+
+    encryption_check = check_if_data_encrypted(numbers_list)
+    # Calls the function to check if encrypted
+
+    if encryption_check == 1:
+        window = tk.Tk()
+        error_label = tk.Label(text='ERROR!')
+        error_message = tk.Label(text='Error! Data Is Encrypted!')
+        error_label.pack()
+        error_message.pack()
+        menu_button = tk.Button(text='Menu', command=lambda: close_window_to_menu(window, numbers_list,
+                                                                                  file_name_entry))
+        menu_button.pack()
+    # If it is encrypted, an error message is displayed and the menu button is available
+
+    else:
+        if len(numbers_list) == 0:
+            check_if_empty_or_not_specified(numbers_list, file_name_entry)
+        # If the length of the list is 0 or empty the function is called to check if it is not specified or if the data
+        # was empty from the beginning
+
+        else:
+            total = 0
+            display_window = tk.Tk()
+            # If not empty, a new window is created to display the numbers in the data file
+
+            label = tk.Label(text='Display All\n')
+            t1 = tk.Label(text='The Numbers In The Data File Are:')
+            label.pack()
+            t1.pack()
+            # Displays the 2 labels on the display screen
+
+            scrollbar = Scrollbar(display_window)
+            scrollbar.pack(side=RIGHT, fill=Y)
+            # Creates a scroll bar on the right for viewing
+
+            mylist = Listbox(display_window, yscrollcommand=scrollbar.set)
+            for items in numbers_list:
+                mylist.insert(END, items)
+                total = total + items
+            # Uses a for loop to find the total of all the numbers as well as inserting it into a display window
+
+            mylist.pack(fill=BOTH)
+            scrollbar.config(command=mylist.yview())
+            # Packs the list and configures the scroll bar so scrolling is possible
+
+            average = total / len(numbers_list)
+            # Finds the average using the total amount of numbers in the file and the sum of the numbers
+
+            total_num = tk.Label(text=f'\nThe Total Of The Numbers Is {total: .2f}')
+            average_num = tk.Label(text=f'\nThe Average Of The Numbers Is {average: .2f}')
+            total_num.pack()
+            average_num.pack()
+            # Prints the total of the numbers and the average on the window
+
+            menu_button = tk.Button(text='Menu', command=lambda: close_window_to_menu(display_window, numbers_list,
+                                                                                      file_name_entry))
+            menu_button.pack()
+            display_window.mainloop()
+            # Displays a menu button for the user
+
+
+def close_window_to_menu(window, number_list, file_name_entry):
+    window.destroy()
+    menu(number_list, file_name_entry)
+
+
+# Close window function, will destroy the window that was up when called and calls the menu function to send the user
+# back to the menu
+
+
+def largest(numbers_list, menu_window, file_name_entry):
+    import tkinter as tk
+    menu_window.destroy()
+    # Destroys menu window
+
+    encryption_check = check_if_data_encrypted(numbers_list)
+    # Calling function to check if data is encrypted
+
+    if encryption_check == 1:
+        window = tk.Tk()
+        error_label = tk.Label(text='ERROR!')
+        error_message = tk.Label(text='Error! Data Is Encrypted!')
+        error_label.pack()
+        error_message.pack()
+        menu_button = tk.Button(text='Menu', command=lambda: close_window_to_menu(window, numbers_list,
+                                                                                  file_name_entry))
+        menu_button.pack()
+    # If it is encrypted, an error message is displayed and the menu button is made available to the user
+
+    else:
+        if len(numbers_list) == 0:
+            check_if_empty_or_not_specified(numbers_list, file_name_entry)
+        # If not encrypted, checks to see if the data is blank
+
+        else:
+            numbers_list.sort()
+            display_window = tk.Tk()
+            label = tk.Label(text='Numbers From Smallest To Largest\n')
+            label.pack()
+            # If not encrypted and not blank the data is sorted and a window is created
+
+            scrollbar = Scrollbar(display_window)
+            scrollbar.pack(side=RIGHT, fill=Y)
+            # Creates a scroll bar on the right
+
+            mylist = Listbox(display_window, yscrollcommand=scrollbar.set)
+            for items in numbers_list:
+                mylist.insert(END, items)
+            # Uses a for loop to find the total of all the numbers as well as inserting it into a display window
+
+            mylist.pack(fill=BOTH)
+            scrollbar.config(command=mylist.yview())
+            # Packs the list and configures the scroll bar
+
+            menu_button = tk.Button(display_window, text='Menu', command=lambda: close_window_to_menu(display_window,
+                                                                                                      numbers_list,
+                                                                                                      file_name_entry))
+            menu_button.pack()
+            display_window.mainloop()
+            # Items printed on the window in order, a menu button is added to allow the user to return to the menu
+
+
+def search_gui(numbers_list, menu_window, file_name_entry):
+    import tkinter as tk
+    menu_window.destroy()
+    # Destroys menu window
+
+    encryption_check = check_if_data_encrypted(numbers_list)
+    # Calls the function to check if data is encrypted
+
+    if encryption_check == 1:
+        window = tk.Tk()
+        error_label = tk.Label(text='ERROR!')
+        error_message = tk.Label(text='Error! Data Is Encrypted!')
+        error_label.pack()
+        error_message.pack()
+        menu_button = tk.Button(text='Menu', command=lambda: close_window_to_menu(window, numbers_list,
+                                                                                  file_name_entry))
+        menu_button.pack()
+    # If the data is encrypted, an error message is displayed on a new window and allows the user to return to the menu
+    # via a menu button
+
+    else:
+        if len(numbers_list) == 0:
+            check_if_empty_or_not_specified(numbers_list, file_name_entry)
+        # If the data is not encrypted, it checks to make sure there is actual data and not empty
+
+        else:
+            display_window = tk.Tk()
+            label = tk.Label(text='Search')
+            label.pack()
+            prompt = tk.Label(text='\nEnter A Number To Search:')
+            prompt.pack()
+            # If the data isn't encrypted and not empty then a new window is created to allow a search
+
+            entry = tk.Entry(display_window)
+            enter_button = tk.Button(display_window, text='Enter', command=lambda: search(display_window, entry,
+                                                                                          numbers_list,
+                                                                                          file_name_entry))
+            entry.pack()
+            enter_button.pack()
+            # Allows for user entry of the number they want to search
+
+            menu_button = tk.Button(text='Menu', command=lambda: close_window_to_menu(display_window, numbers_list,
+                                                                                      file_name_entry))
+            menu_button.pack()
+            display_window.mainloop()
+            # Displays an 'enter' button and a 'menu' button so the user can choose if they want to return to the menu
+            # to continue with the search
+
+
+def search(display_window, entry, numbers_list, file_name_entry):
+    import tkinter as tk
+    entry = entry.get()
+
+    try:
+        float(entry)
+    # Checks to see if the entry can be converted to a float
+
+    except ValueError:
+        error_prompt = tk.Label(display_window, text='\nError! Invalid Entry!')
+        error_prompt.pack()
+        display_window.mainloop()
+    # If the entry can't be converted to a float an error message is displayed
+
+    entry = float(entry)
+    display_window.destroy()
+    # Gets the user entry from the function which called this and then destroys the previous window
+
+    display_window = tk.Tk()
+    label = tk.Label(text='Results')
+    label.pack()
+    counter = 0
+    # Creates a new window for the search information that will be displayed
+
+    for n in range(0, len(numbers_list)):
+        if numbers_list[n] == entry:
+            counter += 1
+    # Cycles through the data and every time the user entry matches up with data on the list, the counter is increase to
+    # track how many times the number is on the list
+
+    if counter > 0:
+        results = tk.Label(text=f'{entry} Was Found {counter} Times!')
+        results.pack()
+    # If the counter is greater than 0 then the user entry was in the data and a success message is displayed on the
+    # window along with how many times the number occurred in the data
+
+    else:
+        error = tk.Label(text=f'Error! {entry} Was Not Found!')
+        error.pack()
+    # If the number was not found in the data it displays that
+
+    menu_button = tk.Button(display_window, text='Menu', command=lambda: close_window_to_menu(display_window,
+                                                                                              numbers_list,
+                                                                                              file_name_entry))
+    menu_button.pack()
+    display_window.mainloop()
+    # Adds a menu button to the window to allow the user to return to the menu
+
+
+def largest_number(numbers_list, menu_window, file_name_entry):
+    import tkinter as tk
+    menu_window.destroy()
+    # Destroys menu window
+
+    encryption_check = check_if_data_encrypted(numbers_list)
+    # Calls the function to check if the data is encrypted
+
+    if encryption_check == 1:
+        window = tk.Tk()
+        error_label = tk.Label(text='ERROR!')
+        error_message = tk.Label(text='Error! Data Is Encrypted!')
+        error_label.pack()
+        error_message.pack()
+        menu_button = tk.Button(text='Menu', command=lambda: close_window_to_menu(window, numbers_list,
+                                                                                  file_name_entry))
+        menu_button.pack()
+    # If the data is encrypted, an error message is displayed, and it displays a menu button to allow the user to return
+    # to the menu
+
+    else:
+        if len(numbers_list) == 0:
+            check_if_empty_or_not_specified(numbers_list, file_name_entry)
+        # If the data is not encrypted then it checks to make sure that the data exists
+
+        else:
+            length = len(numbers_list) - 1
+            numbers_list.sort()
+            # Finds the number of data variables in the list, subtracts one and then sorts the data from smallest to
+            # largest. That way the number at the (length - 1) will be the largest number
+
+            display_window = tk.Tk()
+            label = tk.Label(text='Largest Number')
+            label.pack()
+            biggest_num = tk.Label(text=f'\nThe Largest Number In The Data File Is: {numbers_list[length]}')
+            biggest_num.pack()
+            menu_button = tk.Button(display_window, text='Menu', command=lambda: close_window_to_menu(display_window,
+                                                                                                      numbers_list,
+                                                                                                      file_name_entry))
+            menu_button.pack()
+            display_window.mainloop()
+    # Creates a window to display the selection, finds the largest number, prints the largest number and displays a menu
+    # button to allow the user to return to the menu
+
+
+def append_gui(numbers_list, windows_menu, file_name_entry):
+    import tkinter as tk
+    windows_menu.destroy()
+    # Destroys menu window
+
+    encryption_check = check_if_data_encrypted(numbers_list)
+    # Checks to see if the data is encrypted
+
+    if encryption_check == 1:
+        window = tk.Tk()
+        error_label = tk.Label(text='ERROR!')
+        error_message = tk.Label(text='Error! Data Is Encrypted!')
+        error_label.pack()
+        error_message.pack()
+        menu_button = tk.Button(text='Menu', command=lambda: close_window_to_menu(window, numbers_list,
+                                                                                  file_name_entry))
+        menu_button.pack()
+    # If the data is encrypted, an error message is displayed, and it displays a menu button to allow the user to return
+    # to the menu
+
+    else:
+        if len(numbers_list) == 0:
+            check_if_empty_or_not_specified(numbers_list, file_name_entry)
+        # If the data is not encrypted then it checks to make sure that the data exists
+
+        else:
+            display_window = tk.Tk()
+            label = tk.Label(text='Append Number')
+            label.pack()
+            # If data exists and is not encrypted, a window is created to append a number/numbers to a file
+
+            prompt = tk.Label(text='\nEnter The Amount Of Random Numbers To Be Appended To File:')
+            prompt.pack()
+            entry = tk.Entry(display_window)
+            # Prompts the user to enter the number of random numbers to be appended to the file and has an entry window
+
+            enter_button = tk.Button(display_window, text='Enter', command=lambda: append(display_window, entry,
+                                                                                          numbers_list,
+                                                                                          file_name_entry))
+            # Creates an enter button to allow the user to move on when they have entered the desired amount
+
+            entry.pack()
+            enter_button.pack()
+            menu_button = tk.Button(text='Menu', command=lambda: close_window_to_menu(display_window, numbers_list,
+                                                                                      file_name_entry))
+            menu_button.pack()
+            display_window.mainloop()
+            # Creates a menu button incase the user wishes to return to the menu instead of appending number/s
+
+
+def append(entry_window, entry, numbers_list, file_name_entry):
+    import tkinter as tk
+    import random
+    entry = entry.get()
+    # Gets the user entry
+
+    try:
+        int(entry)
+    # Checks to see if the entry can be converted to an int
+
+    except ValueError:
+        error_prompt = tk.Label(entry_window, text='\nError! Invalid Entry!')
+        error_prompt.pack()
+        entry_window.mainloop()
+    # If the entry can't be converted to an int an error message is displayed
+
+    entry = int(entry)
+    entry_window.destroy()
+    # The entry from the entry window the user entered is collected and saved then the previous window is destroyed
+
+    display_window = tk.Tk()
+    label = tk.Label(text='Append Number\n')
+    label.pack()
+    # A new window is created to append
+
+    if entry < 1:
+        error = tk.Label(text='Error! Number Must be Greater Than 0!')
+        error.pack()
+    # Checks the user entered information, if the user entered a number less than 0 then the program displays an error
+    # message since you can't add a negative number
+
+    else:
+        number = 1
+
+        scrollbar = Scrollbar(display_window)
+        scrollbar.pack(side=RIGHT, fill=Y)
+        # Creates a scroll bar for viewing on the right
+
+        mylist = Listbox(display_window, yscrollcommand=scrollbar.set)
+        while number <= entry:
+            # While loop to loop through the designated number of times the user specified, one for each appending
+            # number
+
+            temp = random.randint(0, 1000000000000)
+            numbers_list.append(temp)
+            mylist.insert(END, f'{temp} Was Appended\n')
+            number += 1
+            # A number is randomly created, and then append to the data list and the counter increases so the process
+            # may loop if needed
+
+        mylist.pack(fill=BOTH)
+        scrollbar.config(command=mylist.yview())
+        # Packs the list and configures the scroll bar
+
+        write_to_file(display_window, numbers_list, file_name_entry)
+        # Calls the function to write the newly appended list to the file, passing the new data list
+
+    menu_button = tk.Button(display_window, text='Menu', command=lambda: close_window_to_menu(display_window,
+                                                                                              numbers_list,
+                                                                                              file_name_entry))
+    menu_button.pack()
+    display_window.mainloop()
+    # Creates a menu button to allow the user to return to the menu
+
+
+def encrypt_gui(numbers_list, menu_window, file_name_entry):
+    import tkinter as tk
+    menu_window.destroy()
+    # Destroys menu window
+
+    encryption_check = check_if_data_encrypted(numbers_list)
+    # Checks to see if the data is encrypted already
+
+    if encryption_check == 1:
+        window = tk.Tk()
+        error_label = tk.Label(text='ERROR!')
+        error_message = tk.Label(text='Error! Data Is Encrypted!')
+        error_label.pack()
+        error_message.pack()
+        menu_button = tk.Button(text='Menu', command=lambda: close_window_to_menu(window, numbers_list,
+                                                                                  file_name_entry))
+        menu_button.pack()
+    # If the data is already encrypted, an error message is displayed and a menu button is generated to allow exit
+    # to the menu
+
+    else:
+        if len(numbers_list) == 0:
+            check_if_empty_or_not_specified(numbers_list, file_name_entry)
+        # If the data is not encrypted, the function checks to make sure the data exists
+
+        else:
+            entry_window = tk.Tk()
+            label = tk.Label(text='Encrypt')
+            label.pack()
+            # If the data does exist, a new window is created for the encryption processes
+
+            description_label = tk.Label(text='Enter Your Key')
+            description_label.pack()
+            entry = tk.Entry()
+            enter_button = tk.Button(text='Enter', command=lambda: encrypt(entry_window, entry, numbers_list,
+                                                                           file_name_entry))
+            entry.pack()
+            enter_button.pack()
+            # Prompts the user to enter their key to encrypt, and allows an entry box for the user to do so, pushing
+            # enter when done
+
+            menu_button = tk.Button(text='Menu', command=lambda: close_window_to_menu(entry_window, numbers_list,
+                                                                                      file_name_entry))
+            menu_button.pack()
+            entry_window.mainloop()
+            # Creates a menu button incase the user decides not to encrypt
+
+
+def encrypt(entry_window, entry, numbers_list, file_name_entry):
+    import tkinter as tk
+    entry = str(entry.get())
+    entry_window.destroy()
+    # Destroys menu window
+
+    display_window = tk.Tk()
+    # Creates a new window
+
+    if entry == 'Josh_Gets_A_100':
+        # Checks to see if the user entered key matches the key
+
+        label = tk.Label(text='Encrypting...\n')
+        label.pack()
+        numbers_list = encryption_using_dictionary(numbers_list)
+        success_message = tk.Label(text='Data Successfully Encrypted!\n')
+        success_message.pack()
+        # Calls the function to encrypt the data, which encrypts and returns the data. A success message is displayed
+
+        write_to_file(display_window, numbers_list, file_name_entry)
+        # The 'write to file' function is called so that the encrypted data will be written to the file
+
+    else:
+        error_message = tk.Label(text='Error! Invalid Key!')
+        error_message.pack()
+        # If the key entered doesn't match then an error message is displayed
+
+    menu_button = tk.Button(text='Menu', command=lambda: close_window_to_menu(display_window, numbers_list,
+                                                                              file_name_entry))
+    menu_button.pack()
+    display_window.mainloop()
+    # A menu button is added to allow the user to return to the menu
+
+
+def encryption_using_dictionary(numbers_list):
+    encryption_dictionary = {'0': 'D', '1': 'x', '2': '!', '3': 'A', '4': '#', '5': 'Y', '6': '@', '7': 'G', '8': 'r',
+                             '9': '%', '.': '$', ' ': 'f', '\n': 'N'}
+    # A simple dictionary created, the key is the decrypted data and the value is what the encrypted data will be
+
+    if type(numbers_list) == str:
+        decrypted_list = []
+        temp_decrypt_number = ''
+        # If this function was called for decryption this will be used
+
+        for number in numbers_list:
+            for key, value in encryption_dictionary.items():
+                if number == value:
+                    # Breaks down the encrypted string into individual characters
+
+                    if value != 'f':
+                        temp_decrypt_number = temp_decrypt_number + key
+                    # If the value is not a space, it adds the key associated with that value to a temporary string
+
+                    if value == 'f':
+                        temp_decrypt_number = float(temp_decrypt_number)
+                        decrypted_list.append(temp_decrypt_number)
+                        temp_decrypt_number = ''
+                    # If the character is a space that means that is the separation of two numbers, the temporary string
+                    # that was being created is converted into a float and appended to the decryption list
+
+        temp_decrypt_number = float(temp_decrypt_number)
+        decrypted_list.append(temp_decrypt_number)
+        # Adds the last number to the list (since the last number isn't followed by a space
+
+        return decrypted_list
+    # For decryption, checks if data is encrypted, if so it decrypts and returns the decrypted data
+
+    else:
+        numbers_list = str(numbers_list)
+        encryption_string = ''
+        # If this function was called, and it is not for decryption purposes then it is for encryption and the follow
+        # code will execute
+
+        for number in numbers_list:
+            if number in encryption_dictionary:
+                temp = encryption_dictionary.get(number)
+                encryption_string = encryption_string + temp
+            # Goes number by number, converting each character from its key to the value and saving it in one string
+
+        return encryption_string
+        # For Encryption, checks to make sure data is decrypted, then it encrypts it, returning encrypted data
+
+
+def decrypt_gui(numbers_list, menu_window, file_name_entry):
+    import tkinter as tk
+    menu_window.destroy()
+    # Destroys menu window
+
+    if len(numbers_list) == 0:
+        check_if_empty_or_not_specified(numbers_list, file_name_entry)
+    # Checks to see if the data is empty or not specified
+
+    check_if_float = isinstance(numbers_list[0], float)
+    # Checks to see if the data is already in float format, if so then the data is already Decrypted
+
+    if check_if_float:
+        error_window = tk.Tk()
+        label = tk.Label(text='Error!')
+        label.pack()
+        # If the data is already decrypted, an error window will be created
+
+        error_label = tk.Label(text='\nData Is Already Decrypted!\n')
+        error_label.pack()
+        menu_button = tk.Button(text='Menu', command=lambda: close_window_to_menu(error_window, numbers_list,
+                                                                                  file_name_entry))
+        menu_button.pack()
+        error_window.mainloop()
+        # An error message will be displayed and the user will have to use the menu button to return to the menu
+
+    else:
+        entry_window = tk.Tk()
+        label = tk.Label(text='Decrypt')
+        label.pack()
+        # If the data exists, a window is created for the decryption process
+
+        description_label = tk.Label(text='Enter Your Key')
+        description_label.pack()
+        entry = tk.Entry()
+        # The key is requested and an entry box is provided to allow entry
+
+        enter_button = tk.Button(text='Enter', command=lambda: decrypt(entry_window, entry, numbers_list,
+                                                                       file_name_entry))
+        entry.pack()
+        enter_button.pack()
+        # Enter button is created to allow the user to proceed
+
+        menu_button = tk.Button(text='Menu', command=lambda: close_window_to_menu(entry_window, numbers_list,
+                                                                                  file_name_entry))
+        menu_button.pack()
+        entry_window.mainloop()
+        # A menu button is added incase the user wants to return to the main menu instead
+
+
+def decrypt(entry_window, entry, numbers_list, file_name_entry):
+    import tkinter as tk
+    entry = str(entry.get())
+    entry_window.destroy()
+    # User entry is retrieved and the window is destroyed
+
+    display_window = tk.Tk()
+    if entry == 'Josh_Gets_A_100':
+        label = tk.Label(text='Decrypting...\n')
+        label.pack()
+        # If the user entered the correct key then a window will be created for the decryption process
+
+        numbers_list = encryption_using_dictionary(numbers_list)
+        success_message = tk.Label(text='Data Successfully Decrypted!\n')
+        success_message.pack()
+        # Function to decrypt the data is called, a success message is displayed when completed
+
+        write_to_file(display_window, numbers_list, file_name_entry)
+        # The decrypted data is written to the file
+
+    else:
+        error_message = tk.Label(text=f'Error! Invalid Key!')
+        error_message.pack()
+    # If the key is incorrect an error message is displayed
+
+    menu_button = tk.Button(text='Menu', command=lambda: close_window_to_menu(display_window, numbers_list,
+                                                                              file_name_entry))
+    menu_button.pack()
+    display_window.mainloop()
+    # A menu button is created to allow the user to return to the menu
+
+
+def check_if_empty_or_not_specified(list_data, file_name_entry):
+    import tkinter as tk
+    window = tk.Tk()
+    error_label = tk.Label(text='ERROR!')
+    error_message = tk.Label(text='Error! No Data File Specified Or Data File Empty!')
+    error_label.pack()
+    error_message.pack()
+    menu_button = tk.Button(text='Menu', command=lambda: close_window_to_menu(window, list_data, file_name_entry))
+    menu_button.pack()
+    # Checks to see if the data is not specified or if the file specified is actually empty
+
+
+def write_to_file(display_window, numbers_list, file_name_entry):
+    import tkinter as tk
+    opened_file = open(f'{file_name_entry}.txt', 'w')
+    # Opens the file the user specified for writing
+
+    for numbers in numbers_list:
+        numbers = str(numbers)
+        opened_file.write(numbers + '\n')
+        # Goes character by character, converting to a string and writing to the file with a new line character added
+
+    success_message = tk.Label(display_window, text=f'Successfully Written To File {file_name_entry}.txt!')
+    success_message.pack()
+    opened_file.close()
+    # Opens file for writing, converts number list to string, writes them in file then closes file, success message
+    # displayed
+
+
+def exit_program():
+    exit()
+# Program terminated
+
+
+if __name__ == '__main__':
+    main()
+# Call Main function
